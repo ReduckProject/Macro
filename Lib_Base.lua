@@ -203,6 +203,14 @@ local g_control = {
     end
 }
 
+g_base["指定心法"] = function(name)
+    return xmountname(tid) == name
+end
+
+g_base["心法名称"] = function()
+    return xmountname(tid)
+end
+
 g_base["瑞氛"] = function()
     if tbuffstate("可打断") and tbuffstate("可眩晕") then
         if cntime("剑飞惊天") == 0 and cntime("剑冲阴阳") == 0 then

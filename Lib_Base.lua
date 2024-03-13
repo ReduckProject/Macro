@@ -181,3 +181,60 @@ g_base["气纯抓点"] = function()
     end
 end
 
+local g_control = {
+    killed = 100,
+    max = 100;
+
+    increment = function(self)
+        self.killed = self.killed + 1
+    end,
+
+    start = function(self)
+        self.killed = 0
+    end,
+
+    stop = function(self)
+        self.killed = self.max
+    end,
+
+    running = function(self)
+        self.killed = self.killed + 1
+        return self.killed <= self.max
+    end
+}
+
+g_base["瑞氛"] = function()
+    if tbuffstate("可打断") and tbuffstate("可眩晕") then
+        if cntime("剑飞惊天") == 0 and cntime("剑冲阴阳") == 0 then
+            g_control["紫气东来"] = cn("紫气东来")
+            if (tlife() > 0.9 and g_control["紫气东来"] > 2) or (tlife() < 0.8 and g_control["紫气东来"] > 1) or (tlife() < 0.6 and g_control["紫气东来"] > 0) then
+                g_control:increment()
+            end
+            g_control:start()
+        end
+    end
+
+    if g_control:running() then
+        cast("剑飞惊天")
+        if(cntime("剑飞惊天") == 0) then
+            return
+        end
+        cast("剑冲阴阳")
+        if (cntime("剑冲阴阳") == 0) then
+            return
+        end
+        moveto(xpos())
+
+        if cn("紫气东来") > 0 then
+            cast("紫气东来")
+        end
+
+        if qidian() > 8 then
+            cast("无我无剑")
+        end
+
+        if tlife() < 0.4 then
+            cast("八荒归元")
+        end
+    end
+end

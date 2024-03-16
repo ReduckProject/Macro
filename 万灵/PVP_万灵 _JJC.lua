@@ -65,22 +65,23 @@ function Main()
     --if keydown("1") then
     --    cast("ÓÎÎí³ËÔÆ")
     --end
-
     if qixue("ĞÇìÇ") and fight() then
         if v["»ÃÁéÓ¡"] == 0 then
-            if not nextbeast("ĞÜ") then
+            if not nextbeast("Ò°Öí") then
                 --Ö»ÕÙÓ¥
-                setbeast({ "ĞÜ", "Ó¥", "ÀÇ", "´óÏó", "Ò°Öí", "»¢" })
+                setbeast({"Ò°Öí", "»¢", "ĞÜ", "Ó¥", "ÀÇ", "´óÏó" })
             end
         end
 
         if v["»ÃÁéÓ¡"] == 1 then
-            if not nextbeast("Ó¥") then
+            if not nextbeast("»¢") then
                 --Ö»ÕÙÓ¥
-                setbeast({ "Ó¥", "ĞÜ", "ÀÇ", "´óÏó", "Ò°Öí", "»¢" })
+                setbeast({  "»¢","Ò°Öí","Ó¥", "ĞÜ", "ÀÇ", "´óÏó"})
             end
 
-            CastX("³ÚÂÉÕÙÒ°")
+            if v["»ÃÁéÓ¡"] == 1 and scdtime("Òı·ç»½Áé") > 2 then
+                CastX("³ÚÂÉÕÙÒ°")
+            end
         end
 
         if v["»ÃÁéÓ¡"] >= 2 and dis() > 0 and dis() < 30 then
@@ -88,12 +89,23 @@ function Main()
         end
     end
 
-    if buff("ÓÎÎí³ËÔÆ") then
-        CastX("³Ú·çÃù½Ç")
-    end
+    --if qixue("ĞÇìÇ") and fight() then
+    --    if v["»ÃÁéÓ¡"] == 1 and scdtime("Òı·ç»½Áé") > 2 then
+    --        CastX("³ÚÂÉÕÙÒ°")
+    --    end
+    --
+    --    if v["»ÃÁéÓ¡"] >= 2 and dis() > 0 and dis() < 30 then
+    --        CastX("ÓÎÎí³ËÔÆ")
+    --    end
+    --end
 
     if fight() and rela("µĞ¶Ô") then
         CastX("Òı·ç»½Áé")
+    end
+
+
+    if buff("ÓÎÎí³ËÔÆ") then
+        CastX("³Ú·çÃù½Ç")
     end
     --ÉèÖÃ¶¯Îï
     --if not nextbeast("Ó¥") then		--Ö»ÕÙÓ¥

@@ -56,14 +56,14 @@ g_base["酿酒打水"] = function()
 end
 
 g_base["切换目标"] = function()
-    g_base["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆", "自己距离<20", "可选中", "自己可视")
+    g_base["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|雨蝶|红眼黑蛇|白额蝎|毒狼蛛|雨蝶|金翅雨蝶", "自己距离<20", "可选中", "自己可视")
     if g_base["20尺内敌人"] ~= 0 then
         settar(g_base["20尺内敌人"])
     end
 end
 
 g_base["切换目标6"] = function()
-    g_base["6尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆", "自己距离<6", "可选中", "自己可视")
+    g_base["6尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|雨蝶|红眼黑蛇|白额蝎|毒狼蛛|雨蝶|金翅雨蝶", "自己距离<6", "可选中", "自己可视")
     if g_base["6尺内敌人"] ~= 0 then
         settar(g_base["6尺内敌人"])
     end
@@ -102,6 +102,7 @@ local castTable = {
 
 castTable["剑出鸿蒙"] = function()
     cast(23969)
+    cast(36099)
 end
 
 castTable["无方行尽"] = function()
@@ -128,9 +129,8 @@ castTable["三才化生"] = function()
     end
 end
 
-
 castTable["八卦洞玄"] = function()
-    if buff("会神")  and qidian() > 9 and tbuffstate("可封内") then
+    if buff("会神") and qidian() > 9 and tbuffstate("可封内") then
         cast("八卦洞玄")
     end
 end
@@ -140,7 +140,7 @@ g_base["气纯抓点"] = function()
     castTable["八卦洞玄"]()
 
     if tbuff("八卦洞玄") then
-        if tbufftime("八卦洞玄") < 0.2 then
+        if tbufftime("八卦洞玄") < 0.1 then
             castTable["万世不竭_二段"]()
             if qidian() > 7 then
                 cast("两仪化形")
@@ -153,7 +153,6 @@ g_base["气纯抓点"] = function()
         if nobuff("紫气东来") and qidian() < 8 then
             cast("紫气东来")
         end
-
 
         if tbufftime("八卦洞玄") < 2.7 then
             castTable["剑出鸿蒙"]()
@@ -168,6 +167,10 @@ g_base["气纯抓点"] = function()
 
         if qidian() > 8 then
             cast("两仪化形")
+        else
+            if nobuff("紫气东来") then
+                cast("四象轮回")
+            end
         end
     end
 
@@ -181,6 +184,11 @@ g_base["气纯抓点"] = function()
     end
 end
 
+g_base["kill"] = function()
+    if qjcount() == 5 and bufftime("气剑") > 3 then
+
+    end
+end
 local g_control = {
     killed = 100,
     max = 100;
@@ -216,22 +224,22 @@ g_base["瑞氛"] = function()
         if cntime("剑飞惊天") == 0 and cntime("剑冲阴阳") == 0 then
             g_control["紫气东来"] = cn("紫气东来")
             if (tlife() > 0.9 and g_control["紫气东来"] > 2) or (tlife() < 0.8 and g_control["紫气东来"] > 1) or (tlife() < 0.6 and g_control["紫气东来"] > 0) then
-                g_control:increment()
+                g_control:start()
             end
-            g_control:start()
         end
     end
 
     if g_control:running() then
         cast("剑飞惊天")
-        if(cntime("剑飞惊天") == 0) then
+        if (scdtime("剑飞惊天") == 0) then
             return
         end
         cast("剑冲阴阳")
-        if (cntime("剑冲阴阳") == 0) then
+        --cast(2690)
+        if (scdtime("剑冲阴阳") == 0) then
             return
         end
-        moveto(xpos())
+        moveto(xpos(tid()))
 
         if cn("紫气东来") > 0 then
             cast("紫气东来")
@@ -244,5 +252,55 @@ g_base["瑞氛"] = function()
         if tlife() < 0.4 then
             cast("八荒归元")
         end
+    end
+end
+
+g_base["浮香丘箱子"] = function(skillname)
+
+    local id = doodad("名字:蓝方菌箱|红方菌箱", "距离<6", "距离最近")
+    if id ~= 0 then
+        if enemy("距离<20") ~= 0 then
+            cast(skillname)
+        end
+        stopmove()
+        if interact(id) then
+            deltimer("浮香丘箱子")
+        end
+        exit()
+    end
+
+    id = doodad("名字:蓝方菌箱|红方菌箱", "距离<24", "距离最近")
+    if id == 0 then
+        return
+    end
+
+    local x, y, z = xpos(id);
+    local tdis = pdis2(x, y)
+    if enemy("距离<20") ~= 0 then
+        cast(skillname)
+    end
+    if tdis > 14 then
+        settimer("浮香丘箱子")
+        if scdtime("蹑云逐月") > 0 then
+            acast("迎风回浪", 180, { nX = x, nY = y })
+        else
+            acast("蹑云逐月", 0, { nX = x, nY = y })
+        end
+        return
+    end
+
+    if tdis > 6 then
+        settimer("浮香丘箱子")
+        if scdtime("凌霄揽胜") > 0 then
+            acast("瑶台枕鹤", 90, { nX = x, nY = y })
+        else
+            acast("凌霄揽胜", -90, { nX = x, nY = y })
+
+        end
+        return
+    end
+
+    if tdis > 6 and gettimer("浮香丘箱子") < 1.5 then
+        moveto(x, y, z)
     end
 end

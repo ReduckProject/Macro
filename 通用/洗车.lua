@@ -36,9 +36,9 @@ function checkString(str)
     -- 检查字符串长度是否大于100
     if str:len() > 20 then
         -- 检查前10个字符是否等于某个特定值
-        local prefix = str:sub(1, 18)
+        local prefix = str:find(1, 10)
         print(prefix .. "pre")
-        if prefix == "您已经加入名剑大会" then
+        if prefix == "您已经加入" then
             return true
         end
     end

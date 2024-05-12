@@ -9,7 +9,7 @@
 g_base = {}
 
 g_base["采集"] = function()
-    interact(doodad("名字:物资|止血草|河底的沙石|冰魂|浩气盟的物资|鱼篓|晶矿|马草|干柴|雪莲|铁血·犒赏", "距离<6", "距离最近"))
+    interact(doodad("名字:物资|止血草|河底的沙石|冰魂|浩气盟的物资|鱼篓|晶矿|马草|干柴|雪莲|铁血·犒赏|押运奖赏", "距离<6", "距离最近"))
 
     if self().GetItemAmountInPackage(5, 4549) < 6 then
         interact(doodad("名字:曼陀罗", "距离<6", "距离最近"))

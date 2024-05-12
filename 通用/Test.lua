@@ -7,8 +7,75 @@
 local ok = false
 
 function Main()
-    local me = self()
-    for i, v in pairs(me) do
-        print(i,v)
+    --local me = self()
+    --for i, v in pairs(me) do
+    --    print(i,v)
+    --end
+    --cast("后撤")
+    --print(endurance(tid()))
+    turn()
+    stopmove()
+    if nobuff("生太极") then
+        cast("生太极", true)
     end
+
+    if nobuff("吞日月") then
+        cast("吞日月", true)
+    end
+    if nobuff("碎星辰") then
+        cast("碎星辰")
+    end
+
+    if buff("碎星辰") or buff("吞日月") then
+        cast("人剑合一")
+    end
+
+    if dis() < 20 and  dis() > 8 then
+        cast("生太极")
+        cast("吞日月")
+        cast("碎星辰")
+    end
+
+    if dis() > 18 and face() < 10 then
+        acast("蹑云逐月")
+        cast("剑冲阴阳")
+    end
+
+
+    if tface() < 90 or dis() > 4 then
+        local x,y,z = xpos(tid())
+        local x_,y_,z_ = pos()
+        local big = ture
+        if( x - x_) > 0 then
+            big = false
+        end
+        if big then
+            moveto(x + 4, y , z);
+        else
+            moveto(x - 4, y , z);
+        end
+    end
+
+    if(tbuffstate("可打断")) then
+        acast("剑飞惊天")
+    end
+
+    if qidian() > 8 and tbuffstate("可定身") then
+        cast("大道无术")
+    end
+
+    if qidian() > 7 then
+        acast("无我无剑")
+    end
+
+    if tlife() < 40 then
+        acast("八荒归元")
+    end
+
+    if dis() < 6 then
+        acast("万剑归宗")
+    end
+
+    acast("三环套月")
+
 end

@@ -36,6 +36,11 @@ function Main(g_player)
 		cast("扶摇直上")
 	end
 
+	if notarget() then
+		f["切换目标"]()
+		turn()
+	end
+
 	--减伤
 	if fight() and life() < 0.6 then
 		cast("春泥护花", true)
@@ -294,5 +299,14 @@ function OnCast(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, 
 			v["玉石后放过阳明指"] = false
 			print("------------------------------ 分隔线")
 		end
+	end
+end
+
+
+
+f["切换目标"] = function()
+	v["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪","自己距离<20", "可选中", "自己可视")
+	if v["20尺内敌人"] ~= 0 then
+		settar(v["20尺内敌人"])
 	end
 end

@@ -64,6 +64,7 @@ function Main(g_player)
 	--v["在马上"] = buff("骑御")
 	--v["有队伍"] = g_player.IsInParty()
 
+	cast("撼如雷")
 	--下马
 	if buff("骑御") and nobuff("驰骋") and cn("任驰骋") > 0 and qixue("龙驭") then
 		--if cdleft(16) >= 1 and v["战意"] < 5 and scdtime("撼如雷") < 1.5 then

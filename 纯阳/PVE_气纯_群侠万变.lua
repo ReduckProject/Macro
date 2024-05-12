@@ -21,6 +21,22 @@ local f = {}
 --主循环
 function Main(g_player)
 	turn()
+
+	--23603, 4523, 1214336
+	if life() < 0.1 then
+		clickButton("Topmost/RevivePanel/WndContainer_BtnList/Btn_Cancel/")
+	end
+	local nid = npc("名字:大龙")
+	if nid ~= 0 then
+		turn()
+		if xdis(nid) > 20 then
+			moveto(xpos(nid))
+		end
+
+		if notarget() then
+			settar(nid)
+		end
+	end
 	--减伤
 	if fight() and life() < 0.5 and nobuff("坐忘无我") then
 		cast("坐忘无我")

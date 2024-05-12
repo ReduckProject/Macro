@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="724b1eb5-425f-48e7-b0bd-3d345cc843b6" name="Changes" comment="feat(load) # load scripts">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Macro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Macro.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib_Base.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Lib_Base.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/load/6.lua" beforeDir="false" afterPath="$PROJECT_DIR$/load/6.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/离经_ZC.lua" beforeDir="false" afterPath="$PROJECT_DIR$/万花/离经_ZC.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/花间_PVE_万灵当歌.lua" beforeDir="false" afterPath="$PROJECT_DIR$/万花/花间_PVE_万灵当歌.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/天策/傲血_PVE_万灵当歌.lua" beforeDir="false" afterPath="$PROJECT_DIR$/天策/傲血_PVE_万灵当歌.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/天策/傲血_PVE_自动刷怪.lua" beforeDir="false" afterPath="$PROJECT_DIR$/天策/傲血_PVE_自动刷怪.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/纯阳/PVE_气纯_群侠万变.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/PVE_气纯_群侠万变.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/纯阳/气纯抓点.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/气纯抓点.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/纯阳/气纯挖矿.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/气纯挖矿.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/通用/Test.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/Test.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/通用/日常.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/日常.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/通用/洗车.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/洗车.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/通用/调试.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/调试.lua" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="NewLua" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2dxDOtnKA5JV8JQjTCFvj95x9NZ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/assiant/Macro/万灵&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\assiant\Macro\万灵" />
+      <recent name="D:\assiant\Macro\load" />
+      <recent name="E:\toy\assiant\Macro\通用" />
+      <recent name="E:\toy\assiant\Macro\bin" />
+      <recent name="E:\toy\assiant\Macro" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\toy\assiant\Macro\bin" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="724b1eb5-425f-48e7-b0bd-3d345cc843b6" name="Changes" comment="" />
+      <created>1710940807056</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710940807056</updated>
+      <workItem from="1710940808117" duration="8730000" />
+      <workItem from="1710987043730" duration="1793000" />
+      <workItem from="1711115454592" duration="4100000" />
+      <workItem from="1711169035571" duration="348000" />
+      <workItem from="1711267191675" duration="17071000" />
+      <workItem from="1711432566610" duration="1108000" />
+      <workItem from="1711467719962" duration="1924000" />
+      <workItem from="1711509144164" duration="6955000" />
+      <workItem from="1711539626883" duration="3215000" />
+      <workItem from="1711589359103" duration="1269000" />
+      <workItem from="1711629252520" duration="8435000" />
+      <workItem from="1711677232180" duration="11071000" />
+      <workItem from="1711784311913" duration="9872000" />
+      <workItem from="1711937449133" duration="10149000" />
+      <workItem from="1712042392018" duration="1899000" />
+      <workItem from="1712121216866" duration="595000" />
+      <workItem from="1712319824671" duration="330000" />
+      <workItem from="1712393486148" duration="2748000" />
+      <workItem from="1712630080597" duration="2771000" />
+      <workItem from="1712767890077" duration="1311000" />
+      <workItem from="1713034628116" duration="1204000" />
+      <workItem from="1713084374659" duration="960000" />
+      <workItem from="1713144247268" duration="636000" />
+      <workItem from="1713232647873" duration="594000" />
+      <workItem from="1713322072176" duration="2440000" />
+      <workItem from="1713417574794" duration="2107000" />
+      <workItem from="1713635164626" duration="593000" />
+      <workItem from="1713704509309" duration="3775000" />
+      <workItem from="1714144143755" duration="1013000" />
+      <workItem from="1714222068031" duration="596000" />
+      <workItem from="1714290131290" duration="599000" />
+      <workItem from="1714353155786" duration="2524000" />
+      <workItem from="1715000244696" duration="3974000" />
+      <workItem from="1715082992332" duration="745000" />
+      <workItem from="1715148379571" duration="7451000" />
+      <workItem from="1715234357839" duration="599000" />
+      <workItem from="1715257044402" duration="5683000" />
+      <workItem from="1715507607953" duration="3757000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat(日常) # 增加功夫熊猫">
+      <option name="closed" value="true" />
+      <created>1711520228304</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711520228304</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(base) # g_base优化">
+      <option name="closed" value="true" />
+      <created>1712319971969</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712319971969</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(活动) # 功夫熊猫日常">
+      <option name="closed" value="true" />
+      <created>1712320056534</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712320056534</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(bin) # 启动">
+      <option name="closed" value="true" />
+      <created>1712686253083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712686253083</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(bin) # 启动">
+      <option name="closed" value="true" />
+      <created>1712686410886</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712686410886</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(load) # load scripts">
+      <option name="closed" value="true" />
+      <created>1715000375801</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715000375801</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat(万灵) # 自动释放">
+      <option name="closed" value="true" />
+      <created>1715536092468</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536092468</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat(Lib) # 公共库">
+      <option name="closed" value="true" />
+      <created>1715536134682</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536134682</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(日常) # 增加功夫熊猫" />
+    <MESSAGE value="feat(base) # g_base优化" />
+    <MESSAGE value="feat(活动) # 功夫熊猫日常" />
+    <MESSAGE value="feat(bin) # 启动" />
+    <MESSAGE value="feat(万灵) # 自动释放" />
+    <MESSAGE value="feat(load) # load scripts" />
+    <MESSAGE value="feat(Lib) # 公共库" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(Lib) # 公共库" />
+  </component>
+</project>

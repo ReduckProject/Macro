@@ -51,7 +51,10 @@ function Main(g_player)
 		if life() < 0.55 then
 			cast("守如山")
 		end
+
+		cast("撼如雷")
 	end
+
 
 	--目标不是敌对, 结束
 	if not rela("敌对") then return end
@@ -198,7 +201,7 @@ function OnStateUpdate(nCurrentLife, nCurrentMana, nCurrentRage, nCurrentEnergy,
 end
 
 f["切换目标"] = function()
-	v["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆","自己距离<20", "可选中", "自己可视")
+	v["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪","自己距离<20", "可选中", "自己可视")
 	if v["20尺内敌人"] ~= 0 then
 		settar(v["20尺内敌人"])
 	end

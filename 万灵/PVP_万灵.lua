@@ -22,7 +22,7 @@ v["没石次数"] = 0
 
 --函数表
 local f = {}
-
+local counter = 0
 --主循环
 function Main()
     if casting("饮羽簇") and castleft() < 0.13 then
@@ -51,8 +51,10 @@ function Main()
     v["标鹄层数"] = tbuffsn("标鹄")
     v["标鹄时间"] = tbufftime("标鹄", id())
     v["目标血量较多"] = rela("敌对") and tlifevalue() > lifemax() * 10
-
-    f["切换目标"]()
+    counter = counter + 1
+    if counter % 20 == 0 then
+        f["切换目标"]()
+    end
     turn()
     if qixue("星烨") and fight() then
         if v["幻灵印"] == 0 then

@@ -22,7 +22,7 @@ v["没石次数"] = 0
 
 --函数表
 local f = {}
-
+local counter = 0
 --主循环
 function Main()
     cast("风失")

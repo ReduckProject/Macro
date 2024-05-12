@@ -8,6 +8,8 @@
 --]]
 
 load("Macro/Lib_PVP.lua")
+load("Macro/Lib_Base.lua")
+load("Macro/Lib_Coordinates.lua")
 
 --关闭自动面向
 setglobal("自动面向", false)
@@ -23,9 +25,48 @@ v["没石次数"] = 0
 --函数表
 local f = {}
 
+local counter = {
+    killed = 16,
+    max = 16;
+
+    increment = function(self)
+        self.killed = self.killed + 1
+    end,
+
+    start = function(self)
+        self.killed = 0
+    end,
+
+    stop = function(self)
+        self.killed = self.max
+    end,
+
+    running = function(self)
+        self.killed = self.killed + 1
+        return self.killed <= self.max
+    end
+}
+
 --主循环
 function Main()
-    cast("风失")
+    if nofight() then
+        local map = map();
+
+        if map == "跨服·烂柯山" or map == "帮会领地" or map == "南屏山" or map == "昆仑" or map == "南屏山" then
+            g_base["采集"]()
+        end
+
+        if map == "帮会领地" then
+            g_base["杀猪"]()
+        end
+
+        if map == "马嵬驿" or map == "龙门荒漠" or map == "巴陵县" or map == "洛道" then
+            g_map_move["移动"]()
+        end
+    end
+
+    --cast("风失")
+    cast(35894)
     if casting("饮羽簇") and castleft() < 0.13 then
         settimer("饮羽簇读条结束")
     end
@@ -35,7 +76,7 @@ function Main()
 
     --应天授命
     if fight() and life() < 0.20 then
-        CastX("应天授命")
+        cast("应天授命")
     end
 
     --初始化变量
@@ -58,25 +99,116 @@ function Main()
     v["标鹄时间"] = tbufftime("标鹄", id())
     v["目标血量较多"] = rela("敌对") and tlifevalue() > lifemax() * 10
 
+    --寒更晓箭
+    if v["弓箭"] < 8 then
+        if nofight() then
+            --没进战把箭装满
+            CastX("寒更晓箭")
+        end
+
+        if v["弓箭"] < 1 then
+            --没箭了装箭, 自动装箭会比GCD晚1帧, 自己装, 抢不过也没影响, 抢过了还能快1帧
+            CastX("寒更晓箭")
+        end
+    end
+
+    if v["弓箭"] >= 5 then
+        v["最后一支箭状态"] = arrow(0)
+        if v["最后一支箭状态"] ~= 3 and v["最后一支箭状态"] ~= 4 then
+            if v["幻灵印"] ~= 1 then
+                --最后一支箭没金乌
+                CastX("空弦惊雁")
+            end
+        end
+    end
+
     --if keydown("ACTIONBAR2_BUTTON10") then
-    --    cast("游雾乘云")
+    --    CastX("游雾乘云")
     --end
     --
     --if keydown("1") then
-    --    cast("游雾乘云")
+    --    CastX("游雾乘云")
     --end
+    --if qixue("蓄锐") and qixue("桑枳") then
+    --
+    --end
+
+    if nofight() or notarget() and tlife() <= 0 or tbuff("斩无常") then
+        return
+    end
+
+    if qixue("朱厌") or qixue("祝灵") and fight() then
+        if qixue("兴游") and v["幻灵印"] >= 3 then
+            if v["弓箭"] < 8 then
+                CastX("寒更晓箭")
+            end
+            CastX("汇灵合契")
+        end
+        if v["幻灵印"] >= 4 then
+            if v["弓箭"] < 8 then
+                CastX("寒更晓箭")
+            end
+            CastX("汇灵合契")
+        end
+
+        if buff("合神") then
+            if v["弓箭"] < 8 then
+                --cast("白羽流星")
+                cast(35974)
+            end
+            if dis() < 10 then
+                if scdtime("聚长川") == 0 and dis() < 10 then
+                    if CastX("聚长川") then
+
+                    end
+                end
+                if scdtime("汇山岚") == 0 and dis() < 6 then
+                    if CastX("汇山岚") then
+
+                    end
+                end
+            end
+
+            if CastX(35688) then
+
+            end
+            return
+        end
+
+        if not qixue("兴游") then
+            if v["幻灵印"] == 1 then
+                --cast("弛律召野")
+                CastX(35696)
+            end
+        else
+            if v["幻灵印"] == 0 then
+                CastX(35696)
+            end
+        end
+    end
+
+    --引风唤灵, 和目标的角色距离大于20尺是在自己附近放
+    if fight() and rela("敌对") and dis3() < 20 then
+        CastX("引风唤灵")
+    end
+
+
     if qixue("星烨") and fight() then
         if v["幻灵印"] == 0 then
             if not nextbeast("野猪") then
                 --只召鹰
-                setbeast({"野猪", "虎", "熊", "鹰", "狼", "大象" })
+                setbeast({ "野猪", "虎", "熊", "鹰", "狼", "大象" })
+            end
+
+            if scdtime("引风唤灵") < 5 then
+                CastX("弛律召野")
             end
         end
 
         if v["幻灵印"] == 1 then
             if not nextbeast("虎") then
                 --只召鹰
-                setbeast({  "虎","野猪","鹰", "熊", "狼", "大象"})
+                setbeast({ "虎", "野猪", "鹰", "熊", "狼", "大象" })
             end
 
             if v["幻灵印"] == 1 and scdtime("引风唤灵") > 2 then
@@ -84,7 +216,7 @@ function Main()
             end
         end
 
-        if v["幻灵印"] >= 2 and dis() > 0 and dis() < 30 then
+        if v["幻灵印"] >= 2 and dis() > 0 and dis() < 30 and bufftime("澄神") < 2 then
             CastX("游雾乘云")
         end
     end
@@ -99,12 +231,19 @@ function Main()
     --    end
     --end
 
-    if fight() and rela("敌对") then
-        CastX("引风唤灵")
-    end
-
+    --if fight() and rela("敌对") then
+    --    CastX("引风唤灵")
+    --end
 
     if buff("游雾乘云") then
+        --if v["弓箭"] <= 3 then
+        --    CastX("弛风鸣角")
+        --end
+
+        --if bufftime("游雾乘云") < 3 then
+        --    CastX("弛风鸣角")
+        --end
+
         CastX("弛风鸣角")
     end
     --设置动物
@@ -117,29 +256,6 @@ function Main()
     --if v["被控时间"] - cdleft(16) > 1 then
     --    CastX("澄神醒梦")
     --end
-
-    if v["弓箭"] >= 5 then
-        v["最后一支箭状态"] = arrow(0)
-        if v["最后一支箭状态"] ~= 3 and v["最后一支箭状态"] ~= 4 then
-            if v["幻灵印"] ~= 1 then
-                --最后一支箭没金乌
-                CastX("空弦惊雁")
-            end
-        end
-    end
-
-    --寒更晓箭
-    if v["弓箭"] < 8 then
-        if nofight() then
-            --没进战把箭装满
-            CastX("寒更晓箭")
-        end
-
-        if v["弓箭"] < 1 then
-            --没箭了装箭, 自动装箭会比GCD晚1帧, 自己装, 抢不过也没影响, 抢过了还能快1帧
-            CastX("寒更晓箭")
-        end
-    end
 
     --副本防开怪
     if getopt("副本防开怪") and dungeon() and nofight() then
@@ -166,6 +282,10 @@ function Main()
             if v["最后一支箭状态"] ~= 2 and v["最后一支箭状态"] ~= 4 then
                 --最后一支箭没金乌
                 if v["幻灵印"] ~= 1 or v["金乌充能次数"] >= 2 then
+                    CastX("金乌见坠")
+                end
+
+                if not qixue("拖月") then
                     CastX("金乌见坠")
                 end
             end
@@ -213,18 +333,13 @@ function Main()
         end
     end
 
-    --引风唤灵, 和目标的角色距离大于20尺是在自己附近放
-    if fight() and rela("敌对") and dis3() < 20 then
-        CastX("引风唤灵")
-    end
-
     --弛律召野
-    if fight() and rela("敌对") and dis3() < 20 then
-        if v["承契层数"] < 5 and mana() > 0.8 then
-            --起手打承契
-            CastX("弛律召野")
-        end
-    end
+    --if fight() and rela("敌对") and dis3() < 20 then
+    --    if v["承契层数"] < 5 and mana() > 0.8 then
+    --        --起手打承契
+    --        CastX("弛律召野")
+    --    end
+    --end
 
     --朝仪万汇
     --if v["目标血量较多"] and v["承契时间"] > 12 and v["弓箭"] < 5 then
@@ -290,6 +405,7 @@ end
 function CastX(szSkill, bSelf)
     if cast(szSkill, bSelf) then
         settimer(szSkill)
+        print(szSkill)
         if v["输出信息"] then
             PrintInfo()
         end

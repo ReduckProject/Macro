@@ -9,7 +9,7 @@ load("Macro/Lib_PVP.lua")
 local ok = false;
 function Main()
 -- 遍历全局环境，检查是否是函数并打印出来
-if ok
+
 for name, value in pairs(_G) do
     print(name,value)
 end

@@ -4,24 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="724b1eb5-425f-48e7-b0bd-3d345cc843b6" name="Changes" comment="feat(load) # load scripts">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Macro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Macro.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lib_Base.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Lib_Base.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/load/6.lua" beforeDir="false" afterPath="$PROJECT_DIR$/load/6.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/万花/离经_ZC.lua" beforeDir="false" afterPath="$PROJECT_DIR$/万花/离经_ZC.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/万花/花间_PVE_万灵当歌.lua" beforeDir="false" afterPath="$PROJECT_DIR$/万花/花间_PVE_万灵当歌.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/天策/傲血_PVE_万灵当歌.lua" beforeDir="false" afterPath="$PROJECT_DIR$/天策/傲血_PVE_万灵当歌.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/天策/傲血_PVE_自动刷怪.lua" beforeDir="false" afterPath="$PROJECT_DIR$/天策/傲血_PVE_自动刷怪.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/纯阳/PVE_气纯_群侠万变.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/PVE_气纯_群侠万变.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/纯阳/气纯抓点.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/气纯抓点.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/纯阳/气纯挖矿.lua" beforeDir="false" afterPath="$PROJECT_DIR$/纯阳/气纯挖矿.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/通用/Test.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/Test.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/通用/日常.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/日常.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/通用/洗车.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/洗车.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/通用/调试.lua" beforeDir="false" afterPath="$PROJECT_DIR$/通用/调试.lua" afterDir="false" />
+    <list default="true" id="724b1eb5-425f-48e7-b0bd-3d345cc843b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib_PVP.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Lib_PVP.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/PVE_离经_怀旧.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/PVE_花间_TW.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/PVE_花间_日月明尊.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/PVE_花间_群侠万变.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/万花/花间_PVE_万灵当歌_TW.lua" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +125,7 @@
       <workItem from="1715148379571" duration="7451000" />
       <workItem from="1715234357839" duration="599000" />
       <workItem from="1715257044402" duration="5683000" />
-      <workItem from="1715507607953" duration="3757000" />
+      <workItem from="1715507607953" duration="4893000" />
     </task>
     <task id="LOCAL-00001" summary="feat(日常) # 增加功夫熊猫">
       <option name="closed" value="true" />
@@ -201,7 +191,39 @@
       <option name="project" value="LOCAL" />
       <updated>1715536134682</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat(load) # load scripts">
+      <option name="closed" value="true" />
+      <created>1715536174323</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536174323</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat(dec) # dec">
+      <option name="closed" value="true" />
+      <created>1715536194364</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536194364</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat(all) # all">
+      <option name="closed" value="true" />
+      <created>1715536278831</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536278831</updated>
+    </task>
+    <task id="LOCAL-00012" summary="delete # 删除功夫熊猫相关脚本">
+      <option name="closed" value="true" />
+      <created>1715536435477</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715536435477</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,8 +246,12 @@
     <MESSAGE value="feat(活动) # 功夫熊猫日常" />
     <MESSAGE value="feat(bin) # 启动" />
     <MESSAGE value="feat(万灵) # 自动释放" />
-    <MESSAGE value="feat(load) # load scripts" />
     <MESSAGE value="feat(Lib) # 公共库" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(Lib) # 公共库" />
+    <MESSAGE value="feat(dec) # dec" />
+    <MESSAGE value="feat(load) # load scripts" />
+    <MESSAGE value="feat(Lib) # load scripts" />
+    <MESSAGE value="feat(all) # all" />
+    <MESSAGE value="delete # 删除功夫熊猫相关脚本" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete # 删除功夫熊猫相关脚本" />
   </component>
 </project>

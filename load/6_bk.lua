@@ -9876,8 +9876,10 @@ _ZMAC.GlobalBroken =function(...)
 		_ZMAC.TurnToTarget(t)
 		_ZMAC_SelTarget(t.dwID)
 	end
+	
+	
+	
 end
-
 --全局鸿蒙
 _ZMAC.GlobalHongmengHealer =function(...)
 	local hPlayer = GetClientPlayer()
@@ -10607,9 +10609,6 @@ _ZMAC.SelectDyingParty=function()
 	end
 end
 
-_ZMAC.TestPrint=function()
-	OutputMessage('MSG_SYS',' 测试。\r\n')
-end
 --//快捷键======================================================================================
 
 --//开关执行热键------------------------------------------------------------------------------
@@ -10664,8 +10663,6 @@ Hotkey.AddBinding("_ZMAC_SetSelectFeet", '【选人距离】','', function() ExucteScr
 Hotkey.AddBinding("_ZMAC_SetSelectLife", '【选人血量】','', function() ExucteScriptCommand("_ZMAC.SetSelectLife()") end , nil)
 Hotkey.AddBinding("_ZMAC_残血敌人", '【一键转火】','', function() ExucteScriptCommand("_ZMAC.SelcectDyingEnemy()") end , nil)
 Hotkey.AddBinding("_ZMAC_残血队友", '【一键治疗】','', function() ExucteScriptCommand("_ZMAC.SelectDyingParty()") end, nil)
-Hotkey.AddBinding("_ZMAC_测试", '【一键测试】','', function() ExucteScriptCommand("_ZMAC.TestPrint()") end, nil)
-Hotkey.AddBinding("_ZMAC_测试", '【一键测试2】','', function() ExucteScriptCommand("_ZMAC.TestPrint()") end, nil)
 ZMAC.DelayCall = _ZMAC.DelayCall
 function _ZMAC.OneKeyWantedPublish()
 	loadstring([[

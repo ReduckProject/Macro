@@ -312,42 +312,56 @@ g_func["处理刀宗缴械"] = function()
     end
 end
 
-g_func["切换目标"] = function(dis)
-    if dis == nil then
-        dis = 20
+g_func["切换目标"] = function(dis2)
+    if dis2 == nil then
+        dis2 = 20
     end
 
-    g_var["20尺内敌人"] = enemy("距离<" .. dis, "视线可达", "没载具", "气血最少")
-    if g_var["20尺内敌人"] ~= 0 then
+
+    local n_id = g_func["N尺内敌人"](dis2)
+    if n_id ~= 0 then
         --没目标或不是敌对
         if not rela("敌对") then
-            settar(g_var["20尺内敌人"])
+            settar(n_id)
+            return
+        end
+
+        if tbuff("守如山|斩无常|啸如虎|镇山河") then
+            settar(n_id)
             return
         end
 
         --当前目标挂了
         if tstate("重伤") then
-            settar(g_var["20尺内敌人"])
+            settar(n_id)
             return
         end
 
         --距离太远
         if dis() > 25 then
-            settar(g_var["20尺内敌人"])
+            settar(n_id)
             return
         end
 
         --视线不可达
         if tnovisible() then
-            settar(g_var["20尺内敌人"])
+            settar(n_id)
             return
         end
 
         --比当前目标血量少
-        if tlife() > 0.3 and xlife(g_var["20尺内敌人"]) < tlife() then
-            settar(g_var["20尺内敌人"])
+        if tlife() > 0.7 and xlife(n_id) < tlife() then
+            settar(n_id)
             return
         end
     end
+end
+
+g_func["N尺内敌人"] = function(dis2, notid)
+    if notid ~= nil and notid ~= 0 then
+         return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少", "ID不等于:".. notid)
+    end
+
+    return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少")
 end
 

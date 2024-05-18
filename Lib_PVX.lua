@@ -3,10 +3,74 @@
 --- Created by Gin.
 --- DateTime: 2024/3/27 14:50
 ---
-local g_pvx = {
-
+g_pvx = {
 }
+local g_pvx_period = {}
+g_pvx["收鱼"]  = function()
+    clickButton("Normal/GetFishPanel/WndContainer_ListAndOperation/WndContainer_NormalFishOperation/Btn_PutInBag/")
+end
 
-g_pvx["太虚剑意"] = function()
+g_pvx["钓鱼"] = function()
+    cast(35963)
+    cast(35964)
+    cast(35965)
+    cast(35966)
 
+    if g_pvx["周期执行"]("钓鱼-收鱼",  8) then
+        g_pvx["收鱼"]()
+    end
+end
+
+g_pvx["周期执行"] = function(name, period)
+    if g_pvx_period[name] == nil then
+        g_pvx_period[name] = 0
+    end
+
+    if g_pvx_period[name] >= period then
+        g_pvx_period[name] = 0
+        return true
+    end
+
+    g_pvx_period[name] = g_pvx_period[name] + 1
+    return false
+end
+
+g_pvx["斗地主"] = function()
+    if g_pvx["周期执行"]("斗地主-间隔", 8) then
+        clickButton("Normal/DdzPanel/Wnd_Operations/Wnd_Prepare/Btn_Ready/")
+        clickButton("Normal/DdzPanel/Wnd_Operations/Wnd_Playing/Wnd_Affordable/Btn_Buchu/")
+        --clickButton("Normal/DdzPanel/Wnd_Operations/Wnd_Demand_Dizhu/Btn_Demand_No/")
+        --clickButton("Normal1/DdzSettlementPanel/Btn_Close/")
+    end
+end
+
+g_pvx["清明射柳-排除"] = {}
+g_pvx["清明射柳"] = function()
+    if nobuff("清明射柳") then
+        g_pvx["清明射柳-排除"] = {}
+        return
+    end
+
+    local exist = g_pvx["清明射柳-排除"]
+    if casting("穿林贯天") then
+        return
+    end
+
+    local nid = npc("名字:柳枝孔明灯|桃枝孔明灯", "距离<55", "距离最近")
+    if nid ~= 0 and not exist[nid] then
+        settar(nid)
+        if xcast(19126, nid) then
+            exist[nid] = true
+        end
+    end
+
+    nid = npc("名字:孔明灯", "距离<10", "距离最近")
+
+    if nid ~= 0 and not exist[nid] then
+        settar(nid)
+        if xcast(19103, nid) then
+            exist[nid] = true
+            return
+        end
+    end
 end

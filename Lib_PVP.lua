@@ -326,10 +326,9 @@ g_func["切换目标"] = function(dis2)
             return
         end
 
-        if tbuff("守如山|斩无常|啸如虎|镇山河") then
-            settar(n_id)
-            return
-        end
+        --if tbuff("守如山|斩无常|啸如虎|镇山河") then
+        --    return
+        --end
 
         --当前目标挂了
         if tstate("重伤") then
@@ -357,6 +356,47 @@ g_func["切换目标"] = function(dis2)
     end
 end
 
+g_func["一刀"] = function(dis2)
+    if dis2 == nil then
+        dis2 = 20
+    end
+
+
+    local n_id = g_func["N尺内敌人"](dis2)
+    if n_id ~= 0 then
+        --没目标或不是敌对
+        if not rela("敌对") then
+            settar(n_id)
+            return
+        end
+
+        --当前目标挂了
+        if tstate("重伤") then
+            settar(n_id)
+            return
+        end
+
+        --距离太远
+        if dis() > 25 then
+            settar(n_id)
+            return
+        end
+
+        --视线不可达
+        if tnovisible() then
+            settar(n_id)
+            return
+        end
+
+        --比当前目标血量少
+        if tlife() > 0.7 and xlife(n_id) < 0.4 then
+            settar(n_id)
+            return
+        end
+    end
+end
+
+
 g_func["N尺内敌人"] = function(dis2, notid)
     if notid ~= nil and notid ~= 0 then
          return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少", "ID不等于:".. notid)
@@ -364,4 +404,99 @@ g_func["N尺内敌人"] = function(dis2, notid)
 
     return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少")
 end
+
+g_func["N尺内敌人有减伤"] = function(dis2)
+    if notid ~= nil and notid ~= 0 then
+        return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少", "buff状态:减伤效果>40")
+    end
+
+    return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少")
+end
+
+g_func["N尺内敌人有buff"] = function(dis2)
+    if notid ~= nil and notid ~= 0 then
+        return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少", "可选中")
+    end
+
+    return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少")
+end
+
+g_counter = {
+
+}
+g_counter["蹑云逐月"]=0
+g_counter["扶摇直上"]=0
+g_counter["扶摇直上"]=0
+g_counter["凌霄揽胜"]=0
+g_counter["迎风回浪"]=0
+g_counter["瑶台枕鹤"]=0
+
+g_counter["太阴指"]=0
+
+g_counter["有效帧数"] = 8
+
+g_func_period = {}
+g_func["周期执行"] = function(name, period)
+    if g_func_period[name] == nil then
+        g_func_period[name] = 0
+    end
+
+    if g_func_period[name] >= period then
+        g_func_period[name] = 0
+        return true
+    end
+
+    g_func_period[name] = g_func_period[name] + 1
+    return false
+end
+
+g_qinggong = {
+}
+
+g_func["小轻功"] = function()
+    g_func["轻功处理"]("扶摇直上", "ACTIONBAR2_BUTTON12")
+    g_func["轻功处理"]("蹑云逐月", "ACTIONBAR2_BUTTON13")
+    g_func["轻功处理"]("迎风回浪", "ACTIONBAR1_BUTTON13")
+    g_func["轻功处理"]("凌霄揽胜", "ACTIONBAR1_BUTTON12")
+    g_func["轻功处理"]("瑶台枕鹤", "ACTIONBAR1_BUTTON14")
+    g_func["轻功处理"]("太阴指", "ACTIONBAR1_BUTTON7")
+    --g_func["轻功处理"]("梯云纵", "ACTIONBAR2_BUTTON2")
+end
+
+g_func["轻功处理"] = function(skillName, actionBar)
+    if keydown(actionBar) then
+        g_counter[skillName] = g_counter["有效帧数"]
+    end
+    if g_counter[skillName] > 0 then
+        cast(skillName)
+        g_counter[skillName] = g_counter[skillName] - 1
+    end
+end
+
+g_skill_action_bar = {}
+--万灵技能
+g_skill_action_bar["劲风簇"] = { 1, 1, false }
+g_skill_action_bar["饮羽簇"] = { 1, 2, false }
+g_skill_action_bar["空弦惊雁"] = { 2, 1, true }
+g_skill_action_bar["金乌见坠"] = { 2, 2, true }
+g_skill_action_bar["白羽流星"] = { 1, 4, false }
+g_skill_action_bar["弛风鸣角"] = { 1, 3, false }
+g_skill_action_bar["没石饮羽"] = { 1, 3, false }
+g_skill_action_bar["流矢雨集"] = { 1, 3, false }
+g_skill_action_bar["风矢"] = { 1, 5 }
+g_skill_action_bar["寒更晓箭"] = { 1, 9 }
+--g_skill_action_bar["霖集簇"] = {1, 4}
+--g_skill_action_bar["弛律召野"] = {1, 6}
+--g_skill_action_bar["应天授命"] = {1, 8}
+--g_skill_action_bar["寒更晓箭"] = {1, 9}
+g_skill_action_bar["引风唤灵"] = { 2, 7 }
+g_skill_action_bar["汇灵合契"] = { 2, 6 }
+g_skill_action_bar["弛律召野"] = { 1, 6 }
+
+g_skill_action_bar["归平野"] = { 1, 1 }
+g_skill_action_bar["聚长川"] = { 1, 2 }
+g_skill_action_bar["汇山岚"] = { 1, 3 }
+
+-- 万花技能
+g_skill_action_bar["厥阴指"] = { 1, 8, true }
 

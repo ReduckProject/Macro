@@ -29,3 +29,7 @@ g_wanling["æ€≥§¥®"] = {1, 2}
 g_wanling["ª„…Ω·∞"] = {1, 3}
 --g_wanling["πÈ∆Ω“∞"] = {1, 1}
 
+g_skill_action_bar = {}
+
+g_skill_action_bar["ÿ “ı÷∏"] = {1,8 ,3}
+

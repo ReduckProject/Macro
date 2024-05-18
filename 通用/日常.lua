@@ -1,5 +1,6 @@
 load("Macro/Lib_Coordinates.lua")
 load("Macro/Lib_Base.lua")
+load("Macro/Lib_PVX.lua")
 
 local f = {}
 function Main()
@@ -15,6 +16,10 @@ function Main()
 
     if map == "马嵬驿" or map == "龙门荒漠" or map == "巴陵县" or map == "洛道" then
         g_map_move["移动"]()
+    end
+
+    if map == "枫叶泊·乐苑" or map == "帮会领地" or map == "广陵邑" then
+        g_pvx["钓鱼"]()
     end
 end
 

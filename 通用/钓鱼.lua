@@ -4,6 +4,7 @@
 --- DateTime: 2024/5/13 1:38
 ---
 
+local counter = 0
 
 function Main(g_player)
     --cast("·¨±¦¡¤Óã²æ")
@@ -16,5 +17,14 @@ function Main(g_player)
     cast(35965)
     cast(35966)
 
+    if counter == 16 then
+        clickButton("Normal/GetFishPanel/WndContainer_ListAndOperation/WndContainer_NormalFishOperation/Btn_PutInBag/")
+    end
+
+    if counter > 16 then
+        counter = 0
+    else
+        counter = counter + 1
+    end
 end
 

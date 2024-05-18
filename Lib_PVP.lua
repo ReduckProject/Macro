@@ -500,3 +500,10 @@ g_skill_action_bar["汇山岚"] = { 1, 3 }
 -- 万花技能
 g_skill_action_bar["厥阴指"] = { 1, 8, true }
 
+
+g_func["自动打怪"] = function()
+    local npc_id = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|南屏山流寇|南屏山流寇头目","自己距离<20", "可选中", "自己可视")
+    if npc_id ~= 0 then
+        settar(npc_id)
+    end
+end

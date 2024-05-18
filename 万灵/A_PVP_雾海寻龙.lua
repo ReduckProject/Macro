@@ -16,6 +16,8 @@ setglobal("自动面向", false)
 --宏选项
 addopt("副本防开怪", false)
 addopt("自动选人", false)
+addopt("自动打怪", false)
+addopt("自动扶摇", false)
 addopt("一刀", false)
 
 --变量表
@@ -32,14 +34,20 @@ function Main()
     g_func["小轻功"]()
 
     if getopt("自动选人") then
-        if g_func["周期执行"]("自动选人", 16) then
+        if g_func["周期执行"]("自动选人", 16) or notarget() then
             g_func["切换目标"](25)
         end
     end
 
     if getopt("一刀") then
-        if g_func["周期执行"]("一刀", 8) then
+        if g_func["周期执行"]("一刀", 8) or notarget() then
             g_func["一刀"]()
+        end
+    end
+
+    if getopt("自动打怪") then
+        if g_func["自动打怪"]() or notarget() then
+            g_func["自动打怪"]()
         end
     end
     --应天授命
@@ -261,8 +269,9 @@ function Main()
     end
     CastX("劲风簇")
 
-    CastX("扶摇直上")
-
+    if getopt("自动扶摇") then
+        CastX("扶摇直上")
+    end
 end
 
 -------------------------------------------------------------------------------

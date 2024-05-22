@@ -5,31 +5,31 @@
 ---
 
 
-g_wanling = {}
-g_wanling["劲风簇"] = {1, 1, false}
-g_wanling["饮羽簇"] = {1, 2, false}
-g_wanling["空弦惊雁"] = {2, 1, true}
-g_wanling["金乌见坠"] = {2, 2, true}
-g_wanling["白羽流星"] = {1, 4, false}
-g_wanling["弛风鸣角"] = {1, 3, false}
-g_wanling["没石饮羽"] = {1, 3, false}
-g_wanling["流矢雨集"] = {1, 3, false}
-g_wanling["风矢"] = {1, 5}
-g_wanling["寒更晓箭"] = {1, 9}
---g_wanling["霖集簇"] = {1, 4}
---g_wanling["弛律召野"] = {1, 6}
---g_wanling["应天授命"] = {1, 8}
---g_wanling["寒更晓箭"] = {1, 9}
-g_wanling["引风唤灵"] = {2, 7}
-g_wanling["汇灵合契"] = {2, 6}
-g_wanling["弛律召野"] = {1, 6}
-
-g_wanling["归平野"] = {1, 1}
-g_wanling["聚长川"] = {1, 2}
-g_wanling["汇山岚"] = {1, 3}
---g_wanling["归平野"] = {1, 1}
-
 g_skill_action_bar = {}
+g_skill_action_bar["劲风簇"] = { 1, 1, false }
+g_skill_action_bar["饮羽簇"] = { 1, 2, false }
+g_skill_action_bar["空弦惊雁"] = { 2, 1, true }
+g_skill_action_bar["金乌见坠"] = { 2, 2, true }
+g_skill_action_bar["白羽流星"] = { 1, 4, false }
+g_skill_action_bar["弛风鸣角"] = { 1, 3, false }
+g_skill_action_bar["没石饮羽"] = { 1, 3, false }
+g_skill_action_bar["流矢雨集"] = { 1, 3, false }
+g_skill_action_bar["风矢"] = { 1, 5 }
+g_skill_action_bar["寒更晓箭"] = { 1, 9 }
+--g_skill_action_bar["霖集簇"] = {1, 4}
+--g_skill_action_bar["弛律召野"] = {1, 6}
+--g_skill_action_bar["应天授命"] = {1, 8}
+--g_skill_action_bar["寒更晓箭"] = {1, 9}
+g_skill_action_bar["引风唤灵"] = { 2, 7 }
+g_skill_action_bar["汇灵合契"] = { 2, 6 }
+g_skill_action_bar["弛律召野"] = { 1, 6 }
 
-g_skill_action_bar["厥阴指"] = {1,8 ,3}
+g_skill_action_bar["归平野"] = { 1, 1 }
+g_skill_action_bar["聚长川"] = { 1, 2 }
+g_skill_action_bar["汇山岚"] = { 1, 3 }
+--g_skill_action_bar["归平野"] = {1, 1}
+
+
+g_skill_action_bar["厥阴指"] = { 2, 7, true }
+g_skill_action_bar["太阴指"] = { 1, 7 }
 

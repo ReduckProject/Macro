@@ -1,3 +1,4 @@
+load("Macro/Lib_Skill.lua")
 --变量表
 g_var = {}
 
@@ -468,7 +469,7 @@ g_func["轻功处理"] = function(skillName, actionBar)
         g_counter[skillName] = g_counter["有效帧数"]
     end
     if g_counter[skillName] > 0 then
-        cast(skillName)
+        g_func["释放技能"](skillName)
         g_counter[skillName] = g_counter[skillName] - 1
     end
 end
@@ -498,12 +499,52 @@ g_skill_action_bar["聚长川"] = { 1, 2 }
 g_skill_action_bar["汇山岚"] = { 1, 3 }
 
 -- 万花技能
-g_skill_action_bar["厥阴指"] = { 1, 8, true }
+g_skill_action_bar["厥阴指"] = { 2, 7, true }
 
 
 g_func["自动打怪"] = function()
     local npc_id = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|南屏山流寇|南屏山流寇头目","自己距离<20", "可选中", "自己可视")
     if npc_id ~= 0 then
         settar(npc_id)
+    end
+end
+
+g_func["释放技能"] = function(szSkill, bSelf)
+    local skill = g_skill_action_bar[szSkill]
+    if skill ~= nil then
+        local _cdleft
+        if skill[3] then
+            _cdleft = scdtime(szSkill)
+        else
+            _cdleft = cdtime(szSkill)
+        end
+        if _cdleft > 0 then
+            return
+        end
+        actionclick(skill[1], skill[2])
+    end
+
+    if cast(szSkill, bSelf) then
+        return true
+    end
+    return false
+end
+
+g_func["敌对释放"] = function(szSkill, bSelf)
+    local skill = g_skill_action_bar[szSkill]
+    if skill ~= nil then
+        local _cdleft
+        if skill[3] then
+            _cdleft = scdtime(szSkill)
+        else
+            _cdleft = cdtime(szSkill)
+        end
+        if _cdleft > 0 then
+            return true
+        end
+        actionclick(skill[1], skill[2])
+        return true
+    else
+        return false
     end
 end

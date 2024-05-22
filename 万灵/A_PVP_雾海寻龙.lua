@@ -48,6 +48,7 @@ function Main()
     if getopt("自动打怪") then
         if g_func["自动打怪"]() or notarget() then
             g_func["自动打怪"]()
+            turn()
         end
     end
     --应天授命
@@ -302,7 +303,7 @@ end
 
 --使用技能并输出信息
 function CastX(szSkill, bSelf)
-    local skill = g_wanling[szSkill]
+    local skill = g_skill_action_bar[szSkill]
     if skill ~= nil then
         local _cdleft
         if skill[3] then

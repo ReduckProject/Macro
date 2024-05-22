@@ -73,7 +73,7 @@ function Main()
     --if buff("雷霆争女")
     if bufftime("八卦洞玄") > 2 then
         if scdtime("太阴指") == 0 then
-            cast("太阴指")
+            CastX("太阴指")
         else
             cast("后撤")
         end
@@ -92,7 +92,7 @@ function Main()
                 xcast("归园", srcid)
             end
         else
-            cast("太阴指")
+            CastX("太阴指")
         end
 
         settar(cid)
@@ -118,14 +118,20 @@ function Main()
     end
 
     --减伤
-    if fight() and life() < 0.5 then
-        cast("星楼月影")
+    if fight() and life() < 0.44 then
+        if nobuff("大针") then
+            cast("星楼月影")
+        else
+            if life() < 0.35 then
+                cast("星楼月影")
+            end
+        end
     end
 
     if target() and scdtime("厥阴指") == 0 then
         --打断
         if getopt("打断") and tbuffstate("可打断") then
-            cast("厥阴指")
+            CastX("厥阴指")
         end
 
         --local rank =  player("没状态:重伤", "关系:敌对", "读条:七星拱瑞|生太极|万世不竭|回雪飘摇|提针|长针|醉舞九天|迷仙引梦|冰蚕牵丝|天斗旋|兵主逆|鸿蒙天禁|杀星在尾|平沙落雁|青霄飞羽|变宫|变徵|笑傲光阴|云生结海|杯水留影|江逐月天|白芷含芳|青川濯莲|川乌射罔|且待时休|钟林毓秀|钟林毓秀|幻光步", "距离<20", "视线可达", "没载具", "气血最少")
@@ -136,6 +142,20 @@ function Main()
         --end
 
         if tcasting("七星拱瑞|生太极|万世不竭|回雪飘摇|提针|长针|醉舞九天|迷仙引梦|冰蚕牵丝|天斗旋|兵主逆|鸿蒙天禁|杀星在尾|平沙落雁|青霄飞羽|变宫|变徵|笑傲光阴|云生结海|杯水留影|江逐月天|白芷含芳|青川濯莲|川乌射罔|且待时休|钟林毓秀|钟林毓秀|幻光步") then
+            output("---")
+
+            if tcastprog() > 0.3 then
+                output("111")
+            end
+
+            if tcastpass() > 0.5 then
+                output("222")
+            end
+
+            if tcastleft() < 0.3 then
+                output("333")
+            end
+
             if tcastprog() > 0.3 or tcastpass() > 0.5 or tcastleft() < 0.3 then
                 CastX("厥阴指")
             end
@@ -144,7 +164,7 @@ function Main()
 
 	if buff("怖畏暗刑") then
 		if nobuff("金乌") then
-			cast("太阴指")
+			CastX("太阴指")
 		end
 
 		if bufftime("怖畏暗刑") > 2.5 then
@@ -173,7 +193,7 @@ function Main()
         CastX("春泥护花")
     end
     --听风
-    if fight() and v["治疗目标血量"] < 0.35 and life() > 0.35 then
+    if fight() and v["治疗目标血量"] < 0.35 then
         CastX("听风吹雪")
     end
 
@@ -197,7 +217,7 @@ function Main()
         end
     end
 
-    if v["治疗目标血量"] < 0.3 then
+    if v["治疗目标血量"] < 0.35 then
         --加血
         CastX("大针")
     end
@@ -286,23 +306,10 @@ end
 
 --对治疗目标使用技能
 function CastX(szSkill)
-    local skill = g_skill_action_bar[szSkill]
-    if skill ~= nil then
-        local _cdleft
-        if skill[3] then
-            _cdleft = scdtime(szSkill)
-        else
-            _cdleft = cdtime(szSkill)
-        end
-        if _cdleft > 0 then
-            print(_cdleft)
-            return
-        end
-        print(szSkill)
-        actionclick(skill[1], skill[2])
-        return
+    local success = g_func["敌对释放"](szSkill)
+    if success then
+        return success
     end
-
     if xcast(szSkill, v["治疗目标"]) then
         if v["记录信息"] then
             PrintInfo()

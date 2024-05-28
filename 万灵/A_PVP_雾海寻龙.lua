@@ -48,12 +48,18 @@ function Main()
     if getopt("自动打怪") then
         if g_func["自动打怪"]() or notarget() then
             g_func["自动打怪"]()
-            turn()
         end
+        turn()
     end
     --应天授命
-    if fight() and life() < 0.25 then
-        CastX("应天授命")
+    if fight()   then
+        if life() < 0.2 then
+            CastX("澄神醒梦")
+        end
+
+        if life() < 0.25 then
+            CastX("应天授命")
+        end
     end
 
     if target() and (not rela("敌对") or tlife() == 0) then
@@ -63,7 +69,6 @@ function Main()
     if nofight() and target() then
         CastX("风矢")
     end
-
 
     if casting("饮羽簇") and castleft() < 0.13 then
         settimer("饮羽簇读条结束")
@@ -88,6 +93,7 @@ function Main()
     v["引风CD"] = scdtime("引风唤灵")
     v["弛律CD"] = scdtime("弛律召野")
     v["朝仪CD"] = scdtime("朝仪万汇")
+    v["游雾乘云CD"] = cdtime("游雾乘云CD")
 
     v["承契层数"] = buffsn("承契")
     v["承契时间"] = bufftime("承契")
@@ -100,6 +106,9 @@ function Main()
     if tbuff("鹊踏枝|斩无常|盾立|镇山河|南风吐故") then
         return
     end
+
+
+
     --寒更晓箭
     if v["弓箭"] < 8 and nobuff("合神") then
         if nofight() then
@@ -112,7 +121,6 @@ function Main()
             CastX("寒更晓箭")
         end
     end
-
     if v["弓箭"] >= 5 then
         v["最后一支箭状态"] = arrow(0)
         if v["最后一支箭状态"] ~= 3 and v["最后一支箭状态"] ~= 4 then
@@ -144,6 +152,68 @@ function Main()
                 CastX("金乌见坠")
             end
         end
+    end
+
+
+    if target() and fight() then
+        if qixue("丛云隐月") then
+            if v["幻灵印"] == 0 and (v["引风CD"] > 13 or v["弛律CD"] > 13) then
+                if scdtime("丛云隐月") < 0.1 then
+                    output("v0")
+                end
+                CastX("丛云隐月")
+            end
+
+            if v["幻灵印"] == 1 and v["引风CD"] > 16 and v["弛律CD"] > 16 then
+                if scdtime("丛云隐月") < 0.1 then
+                    output("v1")
+                end
+                CastX("丛云隐月")
+            end
+        end
+    end
+
+    if qixue("星烨") and fight() then
+        if v["幻灵印"] == 0 then
+            --if not nextbeast("野猪") and not beast("野猪") then
+            --    --只召鹰
+            --    setbeast({ "野猪", "虎", "熊", "鹰", "狼", "大象" })
+            --end
+
+            if scdtime("引风唤灵") < 5 then
+                CastX("弛律召野")
+            end
+        end
+
+        if v["幻灵印"] == 1 then
+            --if not nextbeast("虎") and  not beast("虎") then
+            --    --只召鹰
+            --    setbeast({ "虎", "野猪", "鹰", "熊", "狼", "大象" })
+            --end
+
+            if v["幻灵印"] == 1 and scdtime("引风唤灵") > 2 then
+                CastX("弛律召野")
+            end
+        end
+
+        if v["幻灵印"] >= 2 and dis() > 0 and dis() < 30 then
+            if (scdtime("弛律召野") < 43 and scdtime("弛律召野") > 0) or bufftime("澄神") < 3 then
+                if v["游雾乘云CD"] < 0.3 then
+                    if qixue("丛云隐月") then
+                        CastX("丛云隐月")
+                    end
+                end
+                CastX("游雾乘云")
+            end
+        end
+    end
+
+    if buff("游雾乘云") then
+        if v["弓箭"] >= 2 then
+            CastX("弛风鸣角")
+        end
+        CastX("劲风簇")
+        return
     end
 
     if nofight() or notarget() and tlife() <= 0 or tbuff("斩无常") then
@@ -204,44 +274,6 @@ function Main()
     --引风唤灵, 和目标的角色距离大于20尺是在自己附近放
     if fight() and rela("敌对") and dis3() < 20 then
         CastX("引风唤灵")
-    end
-
-    if qixue("星烨") and fight() then
-        if v["幻灵印"] == 0 then
-            --if not nextbeast("野猪") and not beast("野猪") then
-            --    --只召鹰
-            --    setbeast({ "野猪", "虎", "熊", "鹰", "狼", "大象" })
-            --end
-
-            if scdtime("引风唤灵") < 5 then
-                CastX("弛律召野")
-            end
-        end
-
-        if v["幻灵印"] == 1 then
-            --if not nextbeast("虎") and  not beast("虎") then
-            --    --只召鹰
-            --    setbeast({ "虎", "野猪", "鹰", "熊", "狼", "大象" })
-            --end
-
-            if v["幻灵印"] == 1 and scdtime("引风唤灵") > 2 then
-                CastX("弛律召野")
-            end
-        end
-
-        if v["幻灵印"] >= 2 and dis() > 0 and dis() < 30 then
-            if (scdtime("弛律召野") < 43 and scdtime("弛律召野") > 0) or bufftime("澄神") < 3 then
-                CastX("游雾乘云")
-            end
-        end
-    end
-
-    if buff("游雾乘云") then
-        if v["弓箭"] >= 2 then
-            CastX("弛风鸣角")
-        end
-        CastX("劲风簇")
-        return
     end
 
     if v["弓箭"] >= 3 then

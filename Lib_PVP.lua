@@ -1,6 +1,7 @@
 load("Macro/Lib_Skill.lua")
 --变量表
 g_var = {}
+g_mount_skill = {}
 
 --常用常量
 g_var["快速位移状态"] = "被击退|冲刺|被抓"
@@ -206,20 +207,20 @@ g_func["目标一刀"] = function()
         return false
     end
 
-    --七秀 冥泽
-    if tqixue("冥泽") and tnobuff("冥泽") then
-        return false
-    end
-
-    --藏剑 片玉
-    if tqixue("片玉") and tnobuff("碎玉") then
-        return false
-    end
+    ----七秀 冥泽
+    --if tqixue("冥泽") and tnobuff("冥泽") then
+    --    return false
+    --end
+    --
+    ----藏剑 片玉
+    --if tqixue("片玉") and tnobuff("碎玉") then
+    --    return false
+    --end
 
     --五毒 蝉蜕
-    if tqixue("蝉蜕") and tnobuff("严寒") then
-        return false
-    end
+    --if tqixue("蝉蜕") and tnobuff("严寒") then
+    --    return false
+    --end
 
 
     --长歌 清绝影歌不死
@@ -500,17 +501,48 @@ g_skill_action_bar["汇山岚"] = { 1, 3 }
 
 -- 万花技能
 g_skill_action_bar["厥阴指"] = { 2, 7, true }
+g_skill_action_bar["太阴指"] = { 1, 7 }
 
 
-g_func["自动打怪"] = function()
-    local npc_id = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|南屏山流寇|南屏山流寇头目","自己距离<20", "可选中", "自己可视")
-    if npc_id ~= 0 then
-        settar(npc_id)
+g_skill_action_bar["幽月轮"] = {1, 1}
+g_skill_action_bar["银月斩"] = {1, 2}
+g_skill_action_bar["赤日轮"] = {1, 3}
+g_skill_action_bar["烈日斩"] = {1, 4}
+g_skill_action_bar["光明相"] = {1, 6}
+g_skill_action_bar["幻光步"] = {1, 7}
+g_skill_action_bar["悬象著明"] = {1, 8}
+g_skill_action_bar["流光囚影"] = {1, 9}
+g_skill_action_bar["日月晦"] = {1, 10}
+
+g_skill_action_bar["无明魂锁"] = {2, 1}
+g_skill_action_bar["极乐引"] = {2, 2}
+g_skill_action_bar["贪魔体"] = {2, 4}
+g_skill_action_bar["生死劫"] = {2, 6}
+g_skill_action_bar["怖畏暗刑"] = {2, 7}
+g_skill_action_bar["净世破魔击"] = {2, 8}
+g_skill_action_bar["驱夜断愁"] = {2, 9}
+g_skill_action_bar["暗尘弥散"] = {2, 10}
+
+g_skill_action_bar["斗转星移"] = {1, 7}
+g_skill_action_bar["踏星行"] = {2, 2}
+g_skill_action_bar["巨门北落"] = {2, 4}
+g_skill_action_bar["鸿蒙天禁"] = {1, 4}
+
+g_func["自动打怪"] = function(tdis)
+    if tdis == nil then
+        tdis = 20
+    end
+    if notarget() or dis() > tdis then
+        local npc_id = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪|南屏山流寇|南屏山流寇头目", "自己距离<"..tdis, "可选中", "自己可视")
+        if npc_id ~= 0 then
+            settar(npc_id)
+        end
     end
 end
 
 g_func["释放技能"] = function(szSkill, bSelf)
     local skill = g_skill_action_bar[szSkill]
+
     if skill ~= nil then
         local _cdleft
         if skill[3] then
@@ -522,6 +554,7 @@ g_func["释放技能"] = function(szSkill, bSelf)
             return
         end
         actionclick(skill[1], skill[2])
+        return true
     end
 
     if cast(szSkill, bSelf) then
@@ -531,20 +564,31 @@ g_func["释放技能"] = function(szSkill, bSelf)
 end
 
 g_func["敌对释放"] = function(szSkill, bSelf)
-    local skill = g_skill_action_bar[szSkill]
-    if skill ~= nil then
-        local _cdleft
-        if skill[3] then
-            _cdleft = scdtime(szSkill)
-        else
-            _cdleft = cdtime(szSkill)
-        end
-        if _cdleft > 0 then
+    -- 对敌对玩家释放
+    --if target() and xrela("敌对") and target("player")  then
+        local skill = g_skill_action_bar[szSkill]
+        if skill ~= nil then
+            local _cdleft
+            if skill[3] then
+                _cdleft = scdtime(szSkill)
+            else
+                _cdleft = cdtime(szSkill)
+            end
+            if _cdleft > 0 then
+                return true
+            end
+            actionclick(skill[1], skill[2])
             return true
+        else
+            return false
         end
-        actionclick(skill[1], skill[2])
-        return true
-    else
-        return false
+    --else
+    --    cast(szSkill, bSelf)
+    --end
+end
+
+g_func["芙蓉并蒂处理"] = function()
+    if buff("芙蓉并蒂") then
+        g_func["敌对释放"]()
     end
 end

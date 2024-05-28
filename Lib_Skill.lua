@@ -16,6 +16,7 @@ g_skill_action_bar["没石饮羽"] = { 1, 3, false }
 g_skill_action_bar["流矢雨集"] = { 1, 3, false }
 g_skill_action_bar["风矢"] = { 1, 5 }
 g_skill_action_bar["寒更晓箭"] = { 1, 9 }
+g_skill_action_bar["丛云隐月"] = { 2, 3, true }
 --g_skill_action_bar["霖集簇"] = {1, 4}
 --g_skill_action_bar["弛律召野"] = {1, 6}
 --g_skill_action_bar["应天授命"] = {1, 8}
@@ -33,3 +34,22 @@ g_skill_action_bar["汇山岚"] = { 1, 3 }
 g_skill_action_bar["厥阴指"] = { 2, 7, true }
 g_skill_action_bar["太阴指"] = { 1, 7 }
 
+
+g_skill_action_bar["幽月轮"] = {1, 1}
+g_skill_action_bar["银月斩"] = {1, 2}
+g_skill_action_bar["赤日轮"] = {1, 3}
+g_skill_action_bar["烈日斩"] = {1, 4}
+g_skill_action_bar["光明相"] = {1, 6}
+g_skill_action_bar["幻光步"] = {1, 7}
+g_skill_action_bar["悬象著明"] = {1, 8}
+g_skill_action_bar["流光囚影"] = {1, 9}
+g_skill_action_bar["日月晦"] = {1, 10}
+
+g_skill_action_bar["无明魂锁"] = {2, 1}
+g_skill_action_bar["极乐引"] = {2, 2}
+g_skill_action_bar["贪魔体"] = {2, 4}
+g_skill_action_bar["生死劫"] = {2, 6}
+g_skill_action_bar["怖畏暗刑"] = {2, 7}
+g_skill_action_bar["净世破魔击"] = {2, 8}
+g_skill_action_bar["驱夜断愁"] = {2, 9}
+g_skill_action_bar["暗尘弥散"] = {2, 10}

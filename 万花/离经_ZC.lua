@@ -23,9 +23,10 @@ v["记录信息"] = true
 --函数表
 local f = {}
 
+local x,y,z = pos()
+
 --主循环
 function Main()
-
     --if life() < 0.1 then
     --	clickButton("Topmost/RevivePanel/WndContainer_BtnList/Btn_Cancel/")
     --end
@@ -45,6 +46,8 @@ function Main()
     if keydown(1) then
         cast("扶摇直上")
     end
+
+    local x1,y1,z1 =
 
     g_func["小轻功"]()
 
@@ -68,11 +71,23 @@ function Main()
         end
     end
 
+    if bufftime("兰摧玉折") > 9 and bufftime("钟林毓秀") > 9 then
+        if buff("芙蓉并蒂") then
+            if CastX("太阴指") then
+                return
+            end
+        end
+
+        if nobuff("金屋") and bufftime("芙蓉并蒂") < 4.8  then
+            CastX("星楼月影")
+        end
+    end
+
     g_base["浮香丘箱子"]("星楼月影")
 
     --if buff("雷霆争女")
-    if bufftime("八卦洞玄") > 2 then
-        if scdtime("太阴指") == 0 then
+    if bufftime("八卦洞玄") > 2 and bufftime("八卦洞玄") < 4.6 then
+        if nobuff("金屋") and scdtime("太阴指") == 0 then
             CastX("太阴指")
         else
             cast("后撤")
@@ -141,29 +156,15 @@ function Main()
         --	end
         --end
 
-        if tcasting("七星拱瑞|生太极|万世不竭|回雪飘摇|提针|长针|醉舞九天|迷仙引梦|冰蚕牵丝|天斗旋|兵主逆|鸿蒙天禁|杀星在尾|平沙落雁|青霄飞羽|变宫|变徵|笑傲光阴|云生结海|杯水留影|江逐月天|白芷含芳|青川濯莲|川乌射罔|且待时休|钟林毓秀|钟林毓秀|幻光步") then
-            output("---")
-
-            if tcastprog() > 0.3 then
-                output("111")
-            end
-
-            if tcastpass() > 0.5 then
-                output("222")
-            end
-
-            if tcastleft() < 0.3 then
-                output("333")
-            end
-
+        if tcasting("七星拱瑞|生太极|万世不竭|回雪飘摇|提针|长针|醉舞九天|迷仙引梦|冰蚕牵丝|天斗旋|兵主逆|鸿蒙天禁|杀星在尾|平沙落雁|青霄飞羽|变宫|变徵|笑傲光阴|云生结海|杯水留影|宫|江逐月天|白芷含芳|青川濯莲|川乌射罔|且待时休|兰摧玉折|钟林毓秀|幻光步") then
             if tcastprog() > 0.3 or tcastpass() > 0.5 or tcastleft() < 0.3 then
                 CastX("厥阴指")
             end
         end
     end
 
-	if buff("怖畏暗刑") then
-		if nobuff("金乌") then
+	if buff("怖畏暗刑|抢珠式|八卦洞玄") then
+		if nobuff("金屋") then
 			CastX("太阴指")
 		end
 
@@ -173,7 +174,6 @@ function Main()
 
 		cast("扶摇直上")
 	end
-
 
     --初始化变量
     v["墨意"] = rage()

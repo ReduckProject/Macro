@@ -8,7 +8,7 @@
 
 第十一重奇穴也可以尝试[琼宵]
 --]]
-
+load("Macro/Lib_PVP.lua")
 --关闭自动面向
 setglobal("自动面向", false)
 
@@ -29,6 +29,8 @@ function Main(g_player)
 	if keydown(1) then
 		cast("扶摇直上")
 	end
+
+	g_func["自动打怪"]()
 
 	--减伤
 	if fight() and life() < 0.6 then

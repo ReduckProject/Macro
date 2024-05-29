@@ -10,8 +10,6 @@ local v = {}
 local f = {}
 
 local counter = 0
-
-f["星茶会"] = 537125194
 --主循环
 function Main(g_player)
 
@@ -19,54 +17,38 @@ function Main(g_player)
         return
     end
 
-    if life() < 0.6 then
-        g_func["敌对释放"]("巨门北落")
-        g_func["敌对释放"]("返闭惊魂")
-        g_func["敌对释放"]("鸿蒙天禁")
-        g_func["敌对释放"]("踏星行")
-    end
+    f["敌对复活点处理"]()
+    f["低血量处理"](0.6)
+    f["明教处理"]()
 
-    local nid = npc("名字:天罡武卫|雪魔武卫", "角色距离<4")
-    if nid ~= 0 and xrela("敌对",  nid) then
-		g_func["敌对释放"]("巨门北落")
-        if cdtime("踏星行") == 0 then
-            settar(id())
-			g_func["敌对释放"]("鸿蒙天禁")
-			g_func["敌对释放"]("踏星行")
-			g_func["敌对释放"]("返闭惊魂")
-        end
-    end
-
-    if target() and tid() ~= id() and xrela("敌对", tid()) then
-		if dengcount() < 1 then
-			return
-		end
+    if dengcount() > 0 and target() and xrela("敌对", tid()) then
         if tbuffstate("可拉") then
             g_func["敌对释放"]("斗转星移")
-        --else
-        --    settar(id())
         end
-    end
-
-    if cdtime("斗转星移") > 33 then
-        settar(id())
     end
 
     if cdtime("斗转星移") > 33 then
         if cdtime("踏星行") == 0 then
-            g_func["敌对释放"]("踏星行")
             settar(id())
+            g_func["敌对释放"]("踏星行")
         end
     end
 
-    --counter = counter + 1
-    --if counter ~= 5 then
-    --	return
-    --end
-    --output("sss")
-    --初始化
+
+    if notarget() or tdis() > 25 then
+        f["选中斗转目标"]()
+    else
+        counter = counter + 1
+        if counter ~= 16 then
+            counter = 0
+            f["选中斗转目标"]()
+            return
+        end
+    end
+end
 
 
+f["选中斗转目标"] =  function()
     if cdtime("斗转星移") == 0 then
         nid = player("可选中", "视线可达", "自己可视", "可视自己", "关系:敌对", "距离<24")
 
@@ -77,7 +59,48 @@ function Main(g_player)
 
         end
     end
-
-    counter = 0
 end
 
+f["敌对复活点处理"] =  function()
+    local nid = npc("名字:天罡武卫|雪魔武卫", "角色距离<6")
+    if nid ~= 0 and xrela("敌对",  nid) then
+        if cdtime("鸿蒙天禁"  == 0) then
+            settar(id())
+            cast("鸿蒙天禁")
+        end
+        g_func["敌对释放"]("巨门北落")
+        g_func["敌对释放"]("返闭惊魂")
+        g_func["敌对释放"]("踏星行")
+    end
+end
+
+f["低血量处理"] = function(_life)
+    if _life == nil then
+        _life  =  0.6
+    end
+
+    g_func["敌对释放"]("巨门北落")
+    g_func["敌对释放"]("返闭惊魂")
+    if cdtime("鸿蒙天禁"  == 0) then
+        settar(id())
+        cast("鸿蒙天禁")
+    end
+    g_func["敌对释放"]("踏星行")
+end
+
+f["明教处理"]= function()
+    pid = player("关系:敌对", "内功:焚影圣诀", "自己距离<4")
+    if pid ~=nil  then
+        g_func["敌对释放"]("巨门北落")
+        if cdtime("鸿蒙天禁"  == 0) then
+            settar(id())
+            cast("鸿蒙天禁")
+        end
+        g_func["敌对释放"]("返闭惊魂")
+        g_func["敌对释放"]("踏星行")
+    end
+end
+
+f["封内处理"]  = function()
+
+end

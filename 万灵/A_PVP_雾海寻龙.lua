@@ -28,6 +28,8 @@ v["没石次数"] = 0
 --函数表
 local f = {}
 
+local timerSet = {}
+
 --主循环
 function Main()
 
@@ -51,8 +53,14 @@ function Main()
         end
         turn()
     end
+
+    f["花间处理"]()
+
+    if tbuff("鹊踏枝|斩无常|盾立|镇山河|南风吐月|巨门|冥泽") then
+        return
+    end
     --应天授命
-    if fight()   then
+    if fight() then
         if life() < 0.2 then
             CastX("澄神醒梦")
         end
@@ -103,12 +111,6 @@ function Main()
     v["标鹄时间"] = tbufftime("标鹄", id())
     v["目标血量较多"] = rela("敌对") and tlifevalue() > lifemax() * 10
 
-    if tbuff("鹊踏枝|斩无常|盾立|镇山河|南风吐故") then
-        return
-    end
-
-
-
     --寒更晓箭
     if v["弓箭"] < 8 and nobuff("合神") then
         if nofight() then
@@ -153,7 +155,6 @@ function Main()
             end
         end
     end
-
 
     if target() and fight() then
         if qixue("丛云隐月") then
@@ -395,6 +396,20 @@ function OnCast(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, 
             deltimer("饮羽簇读条结束")
         end
     end
+
+
+    -- 处理定时器
+    local keysToDelete = {}
+    -- 遍历表并记录值小于10的键
+    for key, value in pairs(tableSet) do
+        if gettimer(key) > value then
+            table.insert(keysToDelete, key)
+        end
+    end
+    -- 删除记录的键
+    for _, key in ipairs(keysToDelete) do
+        tableSet[key] = nil
+    end
 end
 
 --战斗状态改变, 日志记录一下用于分析数据
@@ -403,5 +418,37 @@ function OnFight(bFight)
         print("--------------------进入战斗")
     else
         print("--------------------离开战斗")
+    end
+end
+
+function OnPrepare(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, PosY, PosZ, Frame, StartFrame, FrameCount)
+    --if TargetID == id() then
+    --    if SkillName == "刀啸风吟·渊冰" then
+    --        CastX("蹑云逐月")
+    --        CastX("扶摇直上")
+    --        CastX("风尽浮生")
+    --        CastX("后撤")
+    --    end
+    --end
+end
+
+f["花间处理"] = function()
+    if buff("芙蓉并蒂") then
+        CastX("澄神醒梦")
+    end
+end
+
+function OnCast(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, PosY, PosZ, StartFrame, FrameCount)
+    if jjc() then
+        if SkillName == "楚河汉界" and xrela("敌对", CasterID) then
+            CastX("扶摇直上")
+            bigtext("霸刀准备隔墙 注意扶摇减伤")
+        end
+
+        if TargetID == id() then
+            if SkillName == "刀啸风吟·渊冰" then
+                CastX("澄神醒梦")
+            end
+        end
     end
 end

@@ -11,11 +11,26 @@ local f = {}
 
 local counter = 0
 
+f["星茶会"] = 537125194
 --主循环
 function Main(g_player)
-    if npc("名字:天罡武卫", "角色距离<4") ~= 0 then
+
+    if castleft() > 0 then
+        return
+    end
+
+    if life() < 0.6 then
+        g_func["敌对释放"]("巨门北落")
+        g_func["敌对释放"]("返闭惊魂")
+        g_func["敌对释放"]("鸿蒙天禁")
+        g_func["敌对释放"]("踏星行")
+    end
+
+    local nid = npc("名字:天罡武卫|雪魔武卫", "角色距离<4")
+    if nid ~= 0 and xrela("敌对",  nid) then
 		g_func["敌对释放"]("巨门北落")
         if cdtime("踏星行") == 0 then
+            settar(id())
 			g_func["敌对释放"]("鸿蒙天禁")
 			g_func["敌对释放"]("踏星行")
 			g_func["敌对释放"]("返闭惊魂")

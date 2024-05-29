@@ -26,21 +26,7 @@ function OnEnterMap(MapID, MapName)
 end
 
 function OnMessage(szMsg, szType)
-    if checkString(szMsg) then
-        print(szMsg)
+    if szMsg.find(szMsg, "您已经加入") then
         s_init.done = true
     end
-end
-
-function checkString(str)
-    -- 检查字符串长度是否大于100
-    if str:len() > 20 then
-        -- 检查前10个字符是否等于某个特定值
-        local prefix = str:find(1, 10)
-        print(prefix .. "pre")
-        if prefix == "您已经加入" then
-            return true
-        end
-    end
-    return false
 end

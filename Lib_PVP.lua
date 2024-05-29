@@ -366,6 +366,22 @@ g_func["一刀"] = function(dis2)
 
     local n_id = g_func["N尺内敌人"](dis2)
     if n_id ~= 0 then
+        if xbufftime("啸如虎") > 2 then
+            return
+        end
+
+        if xbufftime("守如山") > 2 and xlife(n_id) > 0.3 then
+            return
+        end
+
+        if xbufftime("仇非") > 1  then
+            return
+        end
+
+        if xbufftime("应天授命") > 2 and xlife() > 0.2  then
+            return
+        end
+
         --没目标或不是敌对
         if not rela("敌对") then
             settar(n_id)

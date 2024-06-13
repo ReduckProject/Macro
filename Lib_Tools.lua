@@ -28,12 +28,14 @@ g_tools = {}
 function autoMove(coordinate, reverse)
     initAutoMove(coordinate)
     print(g_tools.cur.."/".. g_tools.len)
+
+    if g_tools.cur > g_tools.len or g_tools.cur < 1 then
+        return true
+    end
+
     if nobuff("ÆïÓù") then
         cast(53)
         return false
-    end
-    if g_tools.cur > g_tools.len or g_tools.cur < 1 then
-        return true
     end
     if next(coordinate) then
         if reverse then

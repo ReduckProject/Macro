@@ -25,6 +25,8 @@ local f = {}
 
 local x,y,z = pos()
 
+v["被芙蓉目标"] = 0
+
 --主循环
 function Main()
     --if life() < 0.1 then
@@ -157,7 +159,7 @@ function Main()
         --end
 
         if tcasting("七星拱瑞|生太极|万世不竭|回雪飘摇|提针|长针|醉舞九天|迷仙引梦|冰蚕牵丝|天斗旋|兵主逆|鸿蒙天禁|杀星在尾|平沙落雁|青霄飞羽|变宫|变徵|笑傲光阴|云生结海|杯水留影|宫|江逐月天|白芷含芳|青川濯莲|川乌射罔|且待时休|兰摧玉折|钟林毓秀|幻光步") then
-            if tcastprog() > 0.3 or tcastpass() > 0.5 or tcastleft() < 0.3 then
+            if tcastprog() > 0.4 or tcastpass() > 0.5 or tcastleft() < 0.3 then
                 CastX("厥阴指")
             end
         end
@@ -182,6 +184,29 @@ function Main()
     v["治疗目标血量"] = xlife(v["治疗目标"])
     v["治疗目标是T"] = xmount("洗髓经|铁牢律|明尊琉璃体|铁骨衣", v["治疗目标"])
 
+    if v["被芙蓉目标"] ~= 0 and v["被芙蓉目标"] ~= id() then
+        settar(v["治疗目标"])
+        v["治疗目标"] = v["被芙蓉目标"]
+    end
+
+    if tbufftime("兰摧玉折") > 9 and tbufftime("钟林毓秀") > 9  then
+        if tbuff("芙蓉并蒂") then
+            v["治疗目标"] = tid()
+            if tnobuff("春泥护花|大针|镇山河|守如山|啸如虎|玄水蛊|天地低昂") then
+                if tnobuff("大针") then
+                    if scdtime("春泥护花") > 0 then
+                        CastX("大针")
+                    else
+                        CastX("春泥护花")
+                    end
+                end
+            end
+
+        end
+    else
+        v["被芙蓉目标"] = 0
+    end
+
     if tid() ~= v["治疗目标"] and id() ~= v["治疗目标"] then
         if (not rela("敌对")) and v["治疗目标血量"] < 0.8 then
             settar(v["治疗目标"])
@@ -189,13 +214,17 @@ function Main()
     end
 
     ---------------------------------------------
-    if fight() and v["治疗目标血量"] < 0.6 then
-        CastX("春泥护花")
+    if fight() then
+        if v["治疗目标血量"] < 0.6 then
+            CastX("春泥护花")
+        end
+
+        --听风
+        if  v["治疗目标血量"] < 0.35 then
+            CastX("听风吹雪")
+        end
     end
-    --听风
-    if fight() and v["治疗目标血量"] < 0.35 then
-        CastX("听风吹雪")
-    end
+
 
     if v["治疗目标血量"] < 0.8 then
         if buff("412|722|932|3458|6266") then
@@ -272,6 +301,7 @@ end
 -------------------------------------------------------------------------------
 
 f["获取治疗目标"] = function()
+
     local targetID = id()   --治疗目标先设置为自己, 不在队伍或者团队中时 party 返回 0
     local partyID = party("没状态:重伤", "不是自己", "距离<24", "视线可达", "没载具", "气血最少")    --获取血量最少队友
 
@@ -317,4 +347,15 @@ function CastX(szSkill)
         return true
     end
     return false
+end
+
+--
+function OnCast(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, PosY, PosZ, StartFrame, FrameCount)
+    if jjc() then
+        if SkillName == "芙蓉并蒂" and xrela("敌对", CasterID) then
+            v["被芙蓉目标"] = TargetID
+        end
+    end
+
+
 end

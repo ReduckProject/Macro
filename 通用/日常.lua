@@ -1,6 +1,10 @@
 load("Macro/Lib_Coordinates.lua")
 load("Macro/Lib_Base.lua")
 load("Macro/Lib_PVX.lua")
+load("Macro/Lib_Tools.lua")
+
+
+addopt("马嵬驿自动跑商", false)
 
 local f = {}
 local goodsExchangeCount = 0
@@ -9,6 +13,10 @@ function Main()
 
     if map == "跨服·烂柯山" or map == "帮会领地" or map == "南屏山" or map == "昆仑" or map == "南屏山" then
         g_base["采集"]()
+    end
+
+    if map == "跨服·烂柯山" then
+        
     end
 
     if map == "帮会领地" then
@@ -36,6 +44,10 @@ function Main()
 
             g_map_move["移动"]()
         end
+    end
+
+    if map == "马嵬驿" and getopt("马嵬驿自动跑商") then
+        autoMove(g_map["马嵬驿神行点到商点"], false)
     end
 
     if map == "枫叶泊·乐苑" or map == "帮会领地" or map == "广陵邑" then

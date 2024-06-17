@@ -25,19 +25,70 @@ function findClosestCoordinateIndex(coordinate)
 end
 
 g_tools = {}
-function autoMove(coordinate, reverse)
-    initAutoMove(coordinate)
-    print(g_tools.cur.."/".. g_tools.len)
 
-    if g_tools.cur > g_tools.len or g_tools.cur < 1 then
-        return true
+g_tools.cur = 1
+g_tools.name = "NONE"
+g_tools.len = 0
+
+--function autoMove(coordinate, reverse)
+--    initAutoMove(coordinate)
+--    print(g_tools.cur.."/".. g_tools.len)
+--    print("333"..g_tools.cur.."/".. g_tools.len)
+--
+--
+--    if reverse then
+--        if g_tools.cur > g_tools.len or g_tools.cur < 1 then
+--            print("4")
+--            return true
+--        end
+--    else
+--        if g_tools.cur < 1 then
+--            return true
+--        end
+--    end
+--
+--
+--    if nobuff("ÆïÓù") and nobuff("×ß»õÀÉ") then
+--        cast(53)
+--        print(555)
+--        return false
+--    end
+--
+--    print(666)
+--    if next(coordinate) then
+--        if reverse then
+--            g_tools.cur = g_tools.cur - 1
+--        else
+--            g_tools.cur = g_tools.cur + 1
+--        end
+--    else
+--        moveto(coordinate[g_tools.cur][1], coordinate[g_tools.cur][2], coordinate[g_tools.cur][3])
+--    end
+--
+--    return false
+--end
+
+function autoMove(coordinate, name, reverse)
+    if name ~= g_tools.name then
+        initAutoMove(coordinate, name)
+    end
+    print(g_tools.cur .. "/" .. g_tools.len)
+    if reverse then
+        if g_tools.cur < 1 then
+            return true
+        end
+    else
+        if g_tools.cur > g_tools.len then
+            return true
+        end
     end
 
-    if nobuff("ÆïÓù") then
+    if nobuff("ÆïÓù") and nobuff("×ß»õÀÉ") then
         cast(53)
         return false
     end
-    if next(coordinate) then
+
+    if autoNext(coordinate) then
         if reverse then
             g_tools.cur = g_tools.cur - 1
         else
@@ -54,24 +105,30 @@ function resetAutoMove()
     g_tools.cur = nil
 end
 
-function next(coordinate)
+function autoNext(coordinate)
+    if g_tools.cur < 1 or g_tools.cur > g_tools.len then
+        return true
+    end
+
     local x, y, z = pos()
     local _x, _y, _z = coordinate[g_tools.cur][1], coordinate[g_tools.cur][2], coordinate[g_tools.cur][3]
 
-    if (math.abs(x - _x) < 100 and math.abs(y - _y) < 100 and math.abs(z - _z) < 500) then
+    if (math.abs(x - _x) < 100 and math.abs(y - _y) < 100) then
         return true
     else
+        if math.abs(x - _x) > 2000 or math.abs(y - _y) > 2000 then
+            g_tools.cur = findClosestCoordinateIndex(coordinate)
+            print("findClosestCoordinateIndex")
+        end
         return false
     end
 
 end
 
-function initAutoMove(coordinate)
-    if g_tools.cur == nil then
-        g_tools.cur = findClosestCoordinateIndex(coordinate)
-    end
-
+function initAutoMove(coordinate, name)
+    g_tools.cur = findClosestCoordinateIndex(coordinate)
     g_tools.len = #coordinate
+    g_tools.name = name
 end
 
 function startDelay()

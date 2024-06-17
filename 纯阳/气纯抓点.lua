@@ -28,25 +28,28 @@ mount_neigong["冰心诀"]=true
 mount_neigong["太玄经"]=true
 mount_neigong["无方"]=true
 
-
 --主循环
 function Main(g_player)
-	--if nofight() or notarget() then
-	--	return
-	--end
-	g_base["气纯抓点"]()
+	if tbuffstate("可锁足") and scdtime("八卦洞玄") == 0 then
+		CastX("五方行尽")
+	end
 
-	--v["生太极"] = npc("关系:自己", "名字:气场碎星辰", "距离<13")
-	--v["破苍穹"] = npc("关系:自己", "名字:气场吞日月", "距离<13")
-	--_, v["气场数量"] = npc("关系:自己", "名字:气场生太极|气场碎星辰|气场吞日月", "距离<13")
-	--if nobuff("生太极") or v["气场数量"] < 3 then
-	--	return
-	--end
-	--
-	--local mountname = xmountname(tid)
-	--
-	--if mount_hps[mountname] then
-	--	g_base["气纯抓点"]()
-	--else
-	--end
+	if buff("会神") and scdtime("八卦洞玄") == 0  then
+		if nobuff("紫气东来") then
+			CastX("紫气东来")
+		end
+
+		if qidian() > 9 then
+			CastX("八卦洞玄")
+		end
+	end
+
+	if buff("紫气东来") then
+		CastX("四象轮回")
+	end
+end
+
+
+function CastX(szSkill, bSelf)
+	g_func["敌对释放"](szSkill, bSelf)
 end

@@ -133,7 +133,7 @@ function Main()
 
 	--吃鼎
 	if gettimer("鼎读条结束") > 0.5 and nobuff("蛊时") and life() < 0.7 and cdleft(16) > 0.5 then
-		interact("仙王蛊鼎")
+		interact(doodad("名字:仙王蛊鼎", "距离<6", "距离最近"))
 	end
 
 	--醉舞

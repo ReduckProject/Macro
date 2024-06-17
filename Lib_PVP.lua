@@ -545,6 +545,19 @@ g_skill_action_bar["踏星行"] = {2, 2}
 g_skill_action_bar["巨门北落"] = {2, 4}
 g_skill_action_bar["鸿蒙天禁"] = {1, 4}
 
+g_skill_action_bar["两仪化形"] = {1, 1}
+g_skill_action_bar["四象轮回"] = {1, 2}
+g_skill_action_bar["万世不竭"] = {1, 3}
+g_skill_action_bar["太极无极"] = {1, 4}
+g_skill_action_bar["紫气东来"] = {1, 6}
+g_skill_action_bar["七星拱瑞"] = {2, 1}
+
+g_skill_action_bar["八卦洞玄"] = {2, 9}
+g_skill_action_bar["五方行尽"] = {2, 6}
+g_skill_action_bar["九转归一"] = {2, 7}
+g_skill_action_bar["凭虚御风"] = {2, 10}
+
+
 g_func["自动打怪"] = function(tdis)
     if tdis == nil then
         tdis = 20

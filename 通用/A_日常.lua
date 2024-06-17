@@ -47,7 +47,7 @@ function Main()
     end
 
     if map == "马嵬驿" and getopt("马嵬驿自动跑商") then
-        autoMove(g_map["马嵬驿神行点到商点"], false)
+        autoMove(g_map["马嵬驿神行点到商点"], "马嵬驿神行点到商点",false)
     end
 
     if map == "枫叶泊·乐苑" or map == "帮会领地" or map == "广陵邑" then

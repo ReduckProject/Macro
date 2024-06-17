@@ -10,6 +10,8 @@ local v = {}
 local f = {}
 
 local counter = 0
+
+addopt("目标锁定", false)
 --主循环
 function Main(g_player)
 
@@ -22,6 +24,8 @@ function Main(g_player)
     if castleft() > 0 then
         return
     end
+
+
 
     f["敌对复活点处理"]()
     f["低血量处理"](0.6)
@@ -45,14 +49,19 @@ function Main(g_player)
     end
 
     if cdtime("斗转星移") < 4 and not state("重伤") then
-        if notarget() or dis() > 25 then
-            f["选中斗转目标"]()
+
+        if target() and getopt("目标锁定") then
+        --    11
         else
-            counter = counter + 1
-            if counter ~= 16 then
-                counter = 0
+            if notarget() or dis() > 25 then
                 f["选中斗转目标"]()
-                return
+            else
+                counter = counter + 1
+                if counter ~= 16 then
+                    counter = 0
+                    f["选中斗转目标"]()
+                    return
+                end
             end
         end
     end
@@ -60,9 +69,9 @@ end
 
 f["选中斗转目标"] = function()
     if cdtime("斗转星移") == 0 then
-        nid = player("可选中", "视线可达", "内功:笑尘诀|太玄经|焚影圣诀|紫霞功", "自己可视", "可视自己", "关系:敌对", "距离<34")
+        nid = player("可选中", "视线可达", "内功:易筋经|凌海诀|笑尘诀|太玄经|焚影圣诀|紫霞功", "自己可视", "可视自己", "关系:敌对", "距离<40")
         if nid == 0 then
-            nid = player("可选中", "视线可达", "自己可视", "可视自己", "关系:敌对", "距离<34")
+            nid = player("可选中", "视线可达", "自己可视", "可视自己", "关系:敌对", "距离<30")
         end
         if nid ~= 0 then
             if xbuffstate("可拉", nid) then

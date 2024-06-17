@@ -83,6 +83,7 @@ function Main()
         end
         return
     end
+
     if nofight() and nobuff("暗尘弥散|4908|11547|12492") then
         --隐身回灵
         if (v["日灵"] < 100 or v["月魂"] < 100) and cdleft(503) <= 0 then
@@ -101,10 +102,12 @@ function Main()
     --if getopt("副本防开怪") and dungeon() and nofight() then return end
 
     --打伤害
-    if buff("悬象著明·日") then
-        f["悬象阶段"]()
-    else
-        f["正常循环"]()
+    if target() then
+        if buff("悬象著明·日") then
+            f["悬象阶段"]()
+        else
+            f["正常循环"]()
+        end
     end
 
     --没打技能记录信息
@@ -141,7 +144,6 @@ end
 
 f["正常循环"] = function()
     if v["目标血量较多"] then
-
         --悬象著明
         if v["满日"] and v["月魂"] >= 80 then
             if v["日月齐光时间"] > 0 and v["日月齐光等级"] == 1 then

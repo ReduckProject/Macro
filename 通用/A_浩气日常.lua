@@ -80,6 +80,8 @@ function Main()
     end
 
     if buff("据点贸易") then
+        clickButton("Topmost/MB_on_switch_map_sure/Wnd_All/Btn_Option1/")
+        clickButton("Normal/OldQuestAcceptPanel/Btn_Sure/")
         if map == "浩气盟" and self().GetItemAmountInPackage(5, 33142) >= 120 then
             autoMove(g_map["浩气盟商点到过图"], "浩气盟商点到过图",false)
         end

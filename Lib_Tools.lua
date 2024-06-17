@@ -30,44 +30,6 @@ g_tools.cur = 1
 g_tools.name = "NONE"
 g_tools.len = 0
 
---function autoMove(coordinate, reverse)
---    initAutoMove(coordinate)
---    print(g_tools.cur.."/".. g_tools.len)
---    print("333"..g_tools.cur.."/".. g_tools.len)
---
---
---    if reverse then
---        if g_tools.cur > g_tools.len or g_tools.cur < 1 then
---            print("4")
---            return true
---        end
---    else
---        if g_tools.cur < 1 then
---            return true
---        end
---    end
---
---
---    if nobuff("骑御") and nobuff("走货郎") then
---        cast(53)
---        print(555)
---        return false
---    end
---
---    print(666)
---    if next(coordinate) then
---        if reverse then
---            g_tools.cur = g_tools.cur - 1
---        else
---            g_tools.cur = g_tools.cur + 1
---        end
---    else
---        moveto(coordinate[g_tools.cur][1], coordinate[g_tools.cur][2], coordinate[g_tools.cur][3])
---    end
---
---    return false
---end
-
 function autoMove(coordinate, name, reverse)
     if name ~= g_tools.name then
         initAutoMove(coordinate, name)
@@ -83,7 +45,7 @@ function autoMove(coordinate, name, reverse)
         end
     end
 
-    if nobuff("骑御") and nobuff("走货郎") then
+    if nofight() and nobuff("骑御") and nobuff("走货郎") then
         cast(53)
         return false
     end

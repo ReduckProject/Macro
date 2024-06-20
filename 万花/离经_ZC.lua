@@ -23,10 +23,11 @@ v["记录信息"] = true
 --函数表
 local f = {}
 
-local x,y,z = pos()
+local x, y, z = pos()
 
 v["被芙蓉目标"] = 0
 addopt("目标锁定", false)
+addopt("攻防送", false)
 --主循环
 function Main()
     --if life() < 0.1 then
@@ -49,12 +50,19 @@ function Main()
         cast("扶摇直上")
     end
 
-    local x1,y1,z1 =
-
-    g_func["小轻功"]()
+    local x1, y1, z1 = g_func["小轻功"]()
 
     if nofight and nobuff("清心静气") then
         cast("清心静气")
+    end
+
+    if getopt("攻防送") then
+        nid = player("可选中", "视线可达", "关系:敌对", "距离<60", "角度<10")
+        if nid ~= 0 then
+            x, y, z = xpos(nid)
+            moveto(x, y, z)
+            return
+        end
     end
 
     if nofight() then
@@ -80,7 +88,7 @@ function Main()
             end
         end
 
-        if nobuff("金屋") and bufftime("芙蓉并蒂") < 4.8  then
+        if nobuff("金屋") and bufftime("芙蓉并蒂") < 4.8 then
             CastX("星楼月影")
         end
     end
@@ -165,17 +173,17 @@ function Main()
         end
     end
 
-	if buff("怖畏暗刑|抢珠式|八卦洞玄") then
-		if nobuff("金屋") then
-			CastX("太阴指")
-		end
+    if buff("怖畏暗刑|抢珠式|八卦洞玄") then
+        if nobuff("金屋") then
+            CastX("太阴指")
+        end
 
-		if bufftime("怖畏暗刑") > 2.5 then
-			cast("后撤")
-		end
+        if bufftime("怖畏暗刑") > 2.5 then
+            cast("后撤")
+        end
 
-		cast("扶摇直上")
-	end
+        cast("扶摇直上")
+    end
 
     --初始化变量
     v["墨意"] = rage()
@@ -189,7 +197,7 @@ function Main()
         v["治疗目标"] = v["被芙蓉目标"]
     end
 
-    if tbufftime("兰摧玉折") > 9 and tbufftime("钟林毓秀") > 9  then
+    if tbufftime("兰摧玉折") > 9 and tbufftime("钟林毓秀") > 9 then
         if tbuff("芙蓉并蒂") then
             v["治疗目标"] = tid()
             if tnobuff("春泥护花|大针|镇山河|守如山|啸如虎|玄水蛊|天地低昂") then
@@ -220,11 +228,10 @@ function Main()
         end
 
         --听风
-        if  v["治疗目标血量"] < 0.35 then
+        if v["治疗目标血量"] < 0.35 then
             CastX("听风吹雪")
         end
     end
-
 
     if v["治疗目标血量"] < 0.8 then
         if buff("412|722|932|3458|6266") then

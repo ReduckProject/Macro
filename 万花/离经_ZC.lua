@@ -26,7 +26,7 @@ local f = {}
 local x,y,z = pos()
 
 v["被芙蓉目标"] = 0
-
+addopt("目标锁定", false)
 --主循环
 function Main()
     --if life() < 0.1 then
@@ -301,6 +301,11 @@ end
 -------------------------------------------------------------------------------
 
 f["获取治疗目标"] = function()
+    if getopt("目标锁定") then
+        if target() and tlife() < life() then
+            return tid();
+        end
+    end
 
     local targetID = id()   --治疗目标先设置为自己, 不在队伍或者团队中时 party 返回 0
     local partyID = party("没状态:重伤", "不是自己", "距离<24", "视线可达", "没载具", "气血最少")    --获取血量最少队友

@@ -304,6 +304,8 @@ f["获取治疗目标"] = function()
     if getopt("目标锁定") then
         if target() and tlife() < life() then
             return tid();
+        else
+            return id()
         end
     end
 

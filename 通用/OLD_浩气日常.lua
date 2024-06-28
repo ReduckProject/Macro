@@ -67,7 +67,7 @@ function Main()
         end
     end
 
-    if map == "巴陵县" or map == "浩气盟" or map == "洛道" or map == "南屏山" then
+    if map == "巴陵县" or map == "浩气盟" or map == "洛道" then
         if goodsExchangeCount < 3 then
             clickButton("Topmost/MB_on_switch_map_sure/Wnd_All/Btn_Option1/")
             clickButton("Normal/OldQuestAcceptPanel/Btn_Sure/")
@@ -82,37 +82,45 @@ function Main()
     if buff("据点贸易") then
         clickButton("Topmost/MB_on_switch_map_sure/Wnd_All/Btn_Option1/")
         clickButton("Normal/OldQuestAcceptPanel/Btn_Sure/")
-
-        if map == "南屏山" and self().GetItemAmountInPackage(5, 21247) >= 120 then
-            autoMove(g_map["南屏山-洛道到商点"], "南屏山商点到洛道",true)
+        if map == "浩气盟" and self().GetItemAmountInPackage(5, 33142) >= 120 then
+            autoMove(g_map["浩气盟商点到过图"], "浩气盟商点到过图",false)
         end
 
-        if map == "洛道" and self().GetItemAmountInPackage(5, 21247) >= 120 then
-            autoMove(g_map["洛道-商点到南屏山"], "巴陵南屏到商点",true)
+        if map == "南屏山" and self().GetItemAmountInPackage(5, 33142) >= 120 then
+            autoMove(g_map["南屏山浩气到巴陵"], "南屏山浩气到巴陵",false)
         end
 
-        if map == "南屏山" and self().GetItemAmountInPackage(5, 21245) >= 120 then
-            autoMove(g_map["南屏山-洛道到商点"], "南屏山商点到洛道",false)
+        if map == "巴陵县" and self().GetItemAmountInPackage(5, 33142) >= 120 then
+            autoMove(g_map["巴陵南屏到商点"], "巴陵南屏到商点",false)
         end
 
-        if map == "洛道" and self().GetItemAmountInPackage(5, 21245) >= 120 then
-            autoMove(g_map["洛道-商点到南屏山"], "巴陵南屏到商点",false)
+        if map == "浩气盟" and self().GetItemAmountInPackage(5, 33143) >= 120 then
+            autoMove(g_map["浩气盟商点到过图"], "浩气盟商点到过图", true)
         end
 
-        --if nobuff("暗尘弥散") then
-        --    if scdtime("暗尘弥散") == 0 then
-        --        cast("暗尘弥散")
-        --    end
-        --
-        --    if buff("超然") then
-        --        cast("贪魔体")
-        --    end
-        --end
+        if map == "南屏山" and self().GetItemAmountInPackage(5, 33143) >= 120 then
+            autoMove(g_map["南屏山浩气到巴陵"], "南屏山浩气到巴陵",true)
+        end
+
+        if map == "巴陵县" and self().GetItemAmountInPackage(5, 33143) >= 120 then
+            autoMove(g_map["巴陵南屏到商点"], "巴陵南屏到商点",true)
+        end
+
+
+        if nobuff("暗尘弥散") then
+            if scdtime("暗尘弥散") == 0 then
+                cast("暗尘弥散")
+            end
+
+            if buff("超然") then
+                cast("贪魔体")
+            end
+        end
 
     end
 
-    if map == "洛道" and nobuff("据点贸易") then
-        if autoMove(g_map["洛道-神行到商点"], "洛道-神行到商点",false) then
+    if map == "浩气盟" and nobuff("据点贸易") then
+        if autoMove(g_map["浩气神行到商点"], "浩气神行到商点",false) then
             if buff("骑御") then
                 cast(54)
             end

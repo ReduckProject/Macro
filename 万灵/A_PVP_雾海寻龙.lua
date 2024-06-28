@@ -56,7 +56,8 @@ function Main()
 
     f["花间处理"]()
 
-    if tbuff("鹊踏枝|斩无常|盾立|镇山河|南风吐月|巨门|冥泽") then
+    --if tbuff("斩无常|盾立|镇山河|南风吐月|巨门|冥泽") then
+    if tbuff("斩无常|盾立|镇山河|南风吐月|巨门") then
         return
     end
     --应天授命

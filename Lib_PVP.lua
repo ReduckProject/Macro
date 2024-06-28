@@ -19,25 +19,25 @@ g_func = {}
 
 
 g_func["初始化"] = function()
-    g_var["目标减伤效果"] = g_func["目标减伤效果"]()
-    g_var["目标闪避效果"] = tbuffstate("闪避效果")
-    g_var["目标减命中效果"] = tbuffstate("减命中效果")
-
-    g_var["目标可控制"] = g_func["目标可控制"]()
-    g_var["目标可攻击"] = g_var["目标可控制"] and g_func["目标可攻击"]()
-    g_var["目标没减伤"] = g_var["目标可攻击"] and g_func["目标没减伤"]()
-
-    --单次免伤, 御和点了奇穴乘龙戏水
-    g_var["目标单次免伤"] = 0
-    local nLeftTime, nStackNum = tbuffstate("单次免伤")
-    if nLeftTime > -0.25 then
-        g_var["目标单次免伤"] = nStackNum
-    end
-
-    g_var["目标一刀"] = g_var["目标没减伤"] and g_var["目标单次免伤"] <= 0 and g_func["目标一刀"]()
-    g_var["突进"] = g_var["目标可攻击"] and g_func["突进"]()
-
-    _, g_var["附近敌人数量"] = enemy("距离<40")
+    --g_var["目标减伤效果"] = g_func["目标减伤效果"]()
+    --g_var["目标闪避效果"] = tbuffstate("闪避效果")
+    --g_var["目标减命中效果"] = tbuffstate("减命中效果")
+    --
+    --g_var["目标可控制"] = g_func["目标可控制"]()
+    --g_var["目标可攻击"] = g_var["目标可控制"] and g_func["目标可攻击"]()
+    --g_var["目标没减伤"] = g_var["目标可攻击"] and g_func["目标没减伤"]()
+    --
+    ----单次免伤, 御和点了奇穴乘龙戏水
+    --g_var["目标单次免伤"] = 0
+    --local nLeftTime, nStackNum = tbuffstate("单次免伤")
+    --if nLeftTime > -0.25 then
+    --    g_var["目标单次免伤"] = nStackNum
+    --end
+    --
+    --g_var["目标一刀"] = g_var["目标没减伤"] and g_var["目标单次免伤"] <= 0 and g_func["目标一刀"]()
+    --g_var["突进"] = g_var["目标可攻击"] and g_func["突进"]()
+    --
+    --_, g_var["附近敌人数量"] = enemy("距离<40")
 end
 
 --不打任何负面技能

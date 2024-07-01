@@ -6,20 +6,24 @@ local s_init = {
     counter = 0,
     fightMap = false
 }
+addopt("队长", false)
 function Main()
     --print(npc("模板ID:16113"))
-    if s_init.counter % 100 == 0 then
-        if not s_init.done then
-            interact(1073741845)
-            clickButton("Normal/ArenaQueue/Wnd_Arena/Wnd_Normal/Btn_TeamQueue")
+    if getopt("队长") then
+        if s_init.counter % 100 == 0 then
+            if not s_init.done then
+                interact(1073741845)
+                clickButton("Normal/ArenaQueue/Wnd_Arena/Wnd_Normal/Btn_TeamQueue")
+            end
         end
+        s_init.counter = s_init.counter + 1
     end
-    s_init.counter = s_init.counter + 1
+
     clickButton("Normal/ACC_JJCShowFinal/Wnd_JJC/Btn_Leave/")
 end
 
 function OnEnterMap(MapID, MapName)
-    if MapName == "长安城" then
+    if not jjc() then
         s_init.counter = 0
         s_init.done = false
     end

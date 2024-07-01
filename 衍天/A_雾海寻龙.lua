@@ -44,7 +44,7 @@ function Main(g_player)
     if cdtime("∂∑◊™–«“∆") > 33 then
         if cdtime("Ã§–«––") == 0 then
             --settar(id())
-            g_func["µ–∂‘ Õ∑≈"]("Ã§–«––")
+            --g_func["µ–∂‘ Õ∑≈"]("Ã§–«––")
         end
     end
 

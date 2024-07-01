@@ -15,6 +15,9 @@ function Main()
     local map = map();
     --打开千里
     clickButton("Topmost/MB_PlayerMessageBoxCommon/Wnd_All/Btn_Option1/")
+
+    -- 上限确认
+    clickButton("Topmost/MB_QuestReachMaxValueWarning/Wnd_All/Btn_Option1/")
     --进入地图
     timer2 = timer2 + 1
     if timer2 > 32 then
@@ -48,8 +51,11 @@ function Main()
     if map == "跨服·烂柯山" then
         timer3 = timer3 + 1
         --离开烂柯山确定
-        --clickButton("Topmost/MB_LeavePVP/Wnd_All/Btn_Option1/")
-        if timer3 < 1000 and timer3 > 100 then
+        --clickButton("Topmost/MB_LeavePVP/Wnd_All/Btn_Option1/")\
+        if timer3 < 200 and timer3 > 50 then
+            jump()
+        end
+        if timer3 < 1000 and timer3 > 200 then
             if autoMove(g_map["恶人烂柯山捡草"], "恶人烂柯山捡草",false) then
                 if buff("骑御") then
                     cast(54)

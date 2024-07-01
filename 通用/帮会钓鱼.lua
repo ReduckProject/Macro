@@ -11,6 +11,10 @@ function Main(g_player)
 		cast(35966)
 	end
 	counter = counter + 1
+
+	--if counter == 16 then
+	--	clickButton("Normal/GetFishPanel/WndContainer_ListAndOperation/WndContainer_NormalFishOperation/Btn_PutInBag/")
+	--end
 end
 
 

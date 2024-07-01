@@ -17,7 +17,7 @@ local pickCounter = 0
 --主循环
 function Main(g_player)
     --初始化
-    g_func["初始化"]()
+    --g_func["初始化"]()
     --if target() then
     --    tx, ty, tz = xpos(tid())
     --end
@@ -105,10 +105,8 @@ function Main(g_player)
         cast("万世不竭")
     end
 
-    if g_var["目标可攻击"] then
-        cast("四象轮回")
-        cast("太极无极")
-    end
+    cast("四象轮回")
+    cast("太极无极")
 
     --采集任务物品
     if nofight() then
@@ -196,7 +194,7 @@ f["花朝节"] = function()
 
     if counter > 100 then
         counter = 0
-		print("Reset")
+        print("Reset")
     end
 
 end

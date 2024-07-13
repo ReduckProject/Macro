@@ -16,19 +16,26 @@ load("Macro/Lib_Base.lua")
 local v = {}
 local f = {}
 
+local id = 0
 --主循环
 function Main(g_player)
-	id = doodad("名字:芍药|五味子|物资|皇竹草", "距离<6", "距离最近")
-	if id > 0 then
-		stopmove()
+	local time = gettimer("采集")
+	if time < 6 then
 		interact(id)
-		return
-	end
-	id = doodad("名字:芍药|五味子|物资|皇竹草", "距离<50", "距离最近")
-	if id == 0 then
 		return
 	end
 
 	local x,y,z = xpos(id);
-	moveto(x, y , z)
+	if(x > 0) then
+		moveto(x, y , z)
+		interact(id)
+		local d =  xdis(id)
+		if d >= 0 and d < 4 then
+			settimer("采集")
+		end
+		return
+	end
+
+	id = doodad("名字:止血草|河底的沙石|浩气盟的物资|鱼篓|晶矿|虫草|马草|干柴|雪莲|芍药|五味子|皇竹草", "距离<50","自己可视", "距离最近")
 end
+

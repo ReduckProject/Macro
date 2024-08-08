@@ -9,31 +9,10 @@ function Main()
 
 
     local nid = doodad("可拾取","距离最近")
+
+    clickButton("Topmost/MB_DropItemSure/Wnd_All/Btn_Option1/")
     if nid ~= 0 then
         moveto(xpos(nid))
         interact(nid)
     end
-    if self().GetItemAmountInPackage(5, 7925) < 20 then
-        if self().GetItemAmountInPackage(5, 7923) < 20 then
-            interact(doodad("名字:冰块", "距离<6", "距离最近"))
-        end
-
-        if self().GetItemAmountInPackage(5, 7924) < 20 then
-            interact(doodad("名字:石灰粉", "距离<6", "距离最近"))
-        end
-
-        use(5, 7923)
-    end
-
-    if self().GetItemAmountInPackage(5, 7920) < 20 then
-        interact(doodad("名字:发芽的土豆", "距离<6", "距离最近"))
-    end
-
-    if self().GetItemAmountInPackage(5, 7922) < 10 then
-        interact(doodad("名字:发霉的饭菜", "距离<6", "距离最近"))
-    end
-
-    --if self().GetItemAmountInPackage(5, 7921) < 20 then
-    --    interact(doodad("名字:腐烂的生菜", "距离<6", "距离最近"))
-    --end
 end

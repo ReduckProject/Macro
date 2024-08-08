@@ -67,6 +67,8 @@ function Main()
     if fight() then
         CastX("引风唤灵")
     end
+
+    CastX("引风唤灵")
     --设置动物
     --if not nextbeast("鹰") then		--只召鹰
     --    setbeast( { "鹰", "虎", "狼", "大象", "野猪", "熊" } )
@@ -266,9 +268,45 @@ function OnFight(bFight)
 end
 
 
+--f["切换目标"] = function()
+--	v["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪","自己距离<20", "可选中", "自己可视")
+--	if v["20尺内敌人"] ~= 0 then
+--		settar(v["20尺内敌人"])
+--	end
+--end
+
+
 f["切换目标"] = function()
-	v["20尺内敌人"] = npc("名字:重霄玄石矿|重霄玄石矿堆|洛丹|吐蕃劫匪","自己距离<20", "可选中", "自己可视")
-	if v["20尺内敌人"] ~= 0 then
-		settar(v["20尺内敌人"])
-	end
+    v["20尺内敌人"] = npc("距离<20", "视线可达", "关系:敌对")
+    if v["20尺内敌人"] ~= 0 then
+        --没目标或不是敌对
+        if not rela("敌对") then
+            settar(v["20尺内敌人"])
+            return
+        end
+
+        --当前目标挂了
+        if tstate("重伤") then
+            settar(v["20尺内敌人"])
+            return
+        end
+
+        --距离太远
+        if dis() > 20 then
+            settar(v["20尺内敌人"])
+            return
+        end
+
+        --视线不可达
+        if tnovisible() then
+            settar(v["20尺内敌人"])
+            return
+        end
+
+        --比当前目标血量少
+        if tlife() > 0.3 and xlife(v["20尺内敌人"]) < tlife() then
+            settar(v["20尺内敌人"])
+            return
+        end
+    end
 end

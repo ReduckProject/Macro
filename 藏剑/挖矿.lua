@@ -144,11 +144,11 @@ f["Çá½£"] = function()
 	end
 
 	--»ÆÁúÍÂ´ä
-	if cdleft(16) >= 0.5 and face() < 80 then
-		if aCastX("»ÆÁúÍÂ´ä", 180) then
-			return
-		end
-	end
+	--if cdleft(16) >= 0.5 and face() < 80 then
+	--	if aCastX("»ÆÁúÍÂ´ä", 180) then
+	--		return
+	--	end
+	--end
 
 	--Óñºç¹áÈÕ
 	if face() < 80 then

@@ -14,7 +14,7 @@
 自动峰插，默认关闭
 宏按键1扶摇
 --]]
-
+load("Macro/Lib_Base.lua")
 --关闭自动面向
 setglobal("自动面向", false)
 
@@ -22,6 +22,7 @@ setglobal("自动面向", false)
 addopt("副本防开怪", false)
 addopt("黄龙开关", true)
 addopt("峰插开关",false )
+addopt("挖矿",false )
 
 --变量表
 local v = {}
@@ -32,6 +33,13 @@ local f = {}
 
 --主循环
 function Main()
+	if getopt("挖矿") then
+		if notarget() then
+			g_base["切换目标6"]()
+		else
+			turn()
+		end
+	end
 	--减伤
 	if fight() and life() < 0.5 then
 		cast("泉凝月")

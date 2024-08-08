@@ -29,12 +29,15 @@ g_tools = {}
 g_tools.cur = 1
 g_tools.name = "NONE"
 g_tools.len = 0
+g_tools.posi = {1, 1, 1}
+g_tools.posCount = 0
+
 
 function autoMove(coordinate, name, reverse)
     if name ~= g_tools.name then
         initAutoMove(coordinate, name)
     end
-    print(g_tools.cur .. "/" .. g_tools.len)
+    --print(name..":"..g_tools.cur .. "/" .. g_tools.len)
     if reverse then
         if g_tools.cur < 1 then
             return true
@@ -57,6 +60,20 @@ function autoMove(coordinate, name, reverse)
             g_tools.cur = g_tools.cur + 1
         end
     else
+        local x,y,z = pos()
+        if g_tools.posi[1] == 0 then
+            g_tools.posi = pos()
+        end
+        if (math.abs(g_tools.posi[1] - x)  + math.abs(g_tools.posi[2] - y) < 10) then
+            g_tools.posCount = g_tools.posCount + 1
+        else
+            g_tools.posCount = 0
+            g_tools.posi = {x, y, z}
+        end
+
+        if g_tools.posCount > 60 then
+            jump()
+        end
         moveto(coordinate[g_tools.cur][1], coordinate[g_tools.cur][2], coordinate[g_tools.cur][3])
     end
 

@@ -10,8 +10,8 @@
 
 Èç¹ûµãÁË[ÁúÔ¦], ÉÏÂíÖ®ºóÁúÔ¦²»µ½3²ã¾Í¶¯ÆğÀ´, µ½3²ãÕ¾×®´ò
 --]]
-load("Macro/Lib_PVP.lua")
-load("Macro/Lib_Base.lua")
+--load("Macro/Lib_PVP.lua")
+--load("Macro/Lib_Base.lua")
 --±äÁ¿±í
 local v = {}
 local f = {}
@@ -31,11 +31,11 @@ function Main(g_player)
 		interact(id)
 		local d =  xdis(id)
 		if d >= 0 and d < 4 then
-			settimer("²É¼¯")
+			--settimer("²É¼¯")
 		end
 		return
 	end
 
-	id = doodad("Ãû×Ö:Ö¹Ñª²İ|ºÓµ×µÄÉ³Ê¯|ºÆÆøÃËµÄÎï×Ê|ÓãÂ¨|¾§¿ó|³æ²İ|Âí²İ|¸É²ñ|Ñ©Á«|ÉÖÒ©|ÎåÎ¶×Ó|»ÊÖñ²İ", "¾àÀë<50","×Ô¼º¿ÉÊÓ", "¾àÀë×î½ü")
+	id = doodad("Ãû×Ö:Ö¹Ñª²İ|ºÓµ×µÄÉ³Ê¯|ºÆÆøÃËµÄÎï×Ê|ÓãÂ¨|¾§¿ó|³æ²İ|Ç§ÀïÏã|Ç¦Ğ¿¿ó|Âí²İ|¸É²ñ|Ñ©Á«|ÉÖÒ©|ÎåÎ¶×Ó|»ÊÖñ²İ|Éºº÷", "¾àÀë<40", "¾àÀë×î½ü")
 end
 

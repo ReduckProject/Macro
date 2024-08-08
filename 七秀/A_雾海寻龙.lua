@@ -18,12 +18,23 @@ v["记录信息"] = true
 --函数表
 local f = {}
 
+load("Macro/Lib_Base.lua")
+load("Macro/Lib_PVP.lua")
 --主循环
 function Main()
 	--按下自定义快捷键1挂扶摇, 注意是快捷键设定里面插件的快捷键1指定的按键，不是键盘上的1
 	if keydown(1) then
 		fcast("扶摇直上")
 	end
+
+	g_base["浮香丘箱子"]("鹊踏枝")
+
+	if nofight() and nobuff("袖气") then
+		cast("婆罗门")
+	end
+
+	g_func["小轻功"]()
+
 
 	--减伤
 	if fight() then
@@ -65,11 +76,46 @@ function Main()
 		v["王母血线"] = 0.7
 	end
 
+	if v["治疗目标"] == 0 then
+		return
+	end
+
+	if tid() ~= v["治疗目标"] and id() ~= v["治疗目标"] then
+		if (not rela("敌对")) and v["治疗目标血量"] < 0.8 then
+			settar(v["治疗目标"])
+		end
+	end
+
+	if buff("小荒泽域") then
+		cast("天地低昂")
+		if life() > 0.5 then
+			return
+		end
+	end
+
+	if buff("展缓") then
+		bigtext("展缓 不要动")
+	end
+
+	if target() and tid() == v["治疗目标"] then
+		if tbuff("小荒泽域") then
+			if tlife() > 0.5 then
+				return
+			end
+		end
+	end
 	--------------------------------------------- 加血
 
 	--回雪第1跳不打断
 	if casting("回雪飘摇") and castprog() < 0.34 then return end
 
+	if qixue("冰肌") and v["治疗目标血量"] > 0.5 and life() < 0.75 then
+		cast("天地低昂")
+	end
+
+	if xbufftime("流血") < 9 and xbuffsn("流血", v["治疗目标"]) > 2  then
+		cast("红绡倩风")
+	end
 	--风袖
 	if fight() and v["治疗目标血量"] < v["风袖血线"] then
 		xcast("风袖低昂", v["治疗目标"], true)
@@ -87,7 +133,8 @@ function Main()
 	end
 
 	--上元 翔鸾
-	if v["治疗目标血量"] < 0.95 then
+	--if v["治疗目标血量"] < 0.95 then
+	if fight() then
 		if xbufftime("上元点鬟", v["治疗目标"], id()) < -1 then
 			xcast("上元点鬟", v["治疗目标"], true)
 		end
@@ -100,6 +147,15 @@ function Main()
 	--回雪
 	if v["治疗目标血量"] < 0.8 then
 		xcast("回雪飘摇", v["治疗目标"], true)
+	end
+
+	if v["治疗目标血量"] < 0.4 then
+		cast("红绡倩风")
+		cast("韶景芳尘")
+	end
+
+	if v["治疗目标血量"] < 0.3 then
+		cast("点绛唇")
 	end
 
 	--脱战救人
@@ -116,6 +172,10 @@ function Main()
 
 	--没事干就给队友上hot
 	xcast("翔鸾舞柳", party("没状态:重伤", "距离<20", "视线可达", "我的buff时间:翔舞<-1"))
+
+	if fight() then
+		cast("扶摇直上")
+	end
 end
 
 -------------------------------------------------------------------------------
@@ -126,5 +186,14 @@ f["获取治疗目标"] = function()
 	if partyID ~= 0 and partyID ~= targetID and xlife(partyID) < life() then	--有血量最少队友且比自己血量少
 		targetID = partyID	--把他指定为治疗目标
 	end
+
+	if xbufftime("小荒泽域", v["治疗目标血量"]) > 0 and xlife(targetID) > 0.6 then
+		targetID = party("没状态:重伤", "不是自己", "距离<20", "视线可达", "没载具", "气血最少", "ID不等于:"..targetID)
+	end
+
+	if targetID == 0 then
+		targetID = id()
+	end
+
 	return targetID
 end

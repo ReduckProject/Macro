@@ -100,7 +100,7 @@ function Main()
     v["碎星辰时间"], v["碎星辰数量"] = qctime(id(), 10, 4980)    --自己10尺内碎星辰, 最短时间, 数量
     if nofight() and rela("敌对") then
         if v["碎星辰数量"] < 3 or v["碎星辰时间"] < 12 then
-            CastX("碎星辰")
+            CastX("碎星辰", true)
         end
     end
 
@@ -120,7 +120,7 @@ function Main()
     v["碎星辰气场距离"], v["碎星辰气场时间"] = qc("气场碎星辰", id(), id())
     if rela("敌对") and v["碎星辰气场距离"] > 0 then
         --没有碎星辰或在外面
-        CastX("碎星辰")
+        CastX("碎星辰", true)
     end
 
     --橙武
@@ -166,7 +166,7 @@ function Main()
 
     --吞日月
     if rela("敌对") and v["吞日月"] == 0 and v["紫气时间"] < 0 then
-        CastX("吞日月")
+        CastX("吞日月", true)
     end
 
     --化三清

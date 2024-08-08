@@ -52,6 +52,9 @@ function Main()
 
     local x1, y1, z1 = g_func["Ð¡Çá¹¦"]()
 
+    if buff("Õ¹»º") then
+        bigtext("Õ¹»º ²»Òª¶¯")
+    end
     if nofight and nobuff("ÇåÐÄ¾²Æø") then
         cast("ÇåÐÄ¾²Æø")
     end
@@ -166,8 +169,16 @@ function Main()
         --	end
         --end
 
-        if tcasting("ÆßÐÇ¹°Èð|ÉúÌ«¼«|ÍòÊÀ²»½ß|»ØÑ©Æ®Ò¡|ÌáÕë|³¤Õë|×íÎè¾ÅÌì|ÃÔÏÉÒýÃÎ|±ù²ÏÇ£Ë¿|Ìì¶·Ðý|±øÖ÷Äæ|ºèÃÉÌì½û|É±ÐÇÔÚÎ²|Æ½É³ÂäÑã|ÇàÏö·ÉÓð|±ä¹¬|±äáç|Ð¦°Á¹âÒõ|ÔÆÉú½áº£|±­Ë®ÁôÓ°|¹¬|½­ÖðÔÂÌì|°×ÜÆº¬·¼|Çà´¨åªÁ«|´¨ÎÚÉäØè|ÇÒ´ýÊ±ÐÝ|À¼´ÝÓñÕÛ|ÖÓÁÖØ¹Ðã|»Ã¹â²½") then
+        if tcasting("ÆßÐÇ¹°Èð|ÉúÌ«¼«|ÍÌÈÕÔÂ|ÐÐÌìµÀ|ËÄÏóÂÖ»Ø|ÍòÊÀ²»½ß|ÁùºÏ¶À×ð|»ØÑ©Æ®Ò¡|ÌáÕë|³¤Õë|ÀûÕë|×íÎè¾ÅÌì|ÃÔÏÉÒýÃÎ|±ù²ÏÇ£Ë¿|Ìì¶·Ðý|±øÖ÷Äæ|ÁÐËÞÓÎ|ºèÃÉÌì½û|É±ÐÇÔÚÎ²|Æ½É³ÂäÑã|±­Ë®ÁôÓ°|ÇàÏö·ÉÓð|±ä¹¬|¹¬|áç|±äáç|Ð¦°Á¹âÒõ|ÔÆÉú½áº£|±­Ë®ÁôÓ°|¹¬|½­ÖðÔÂÌì|°×ÜÆº¬·¼|Çà´¨åªÁ«|´¨ÎÚÉäØè|²Ô¼¬¸¿µØ|ÉÌÂ½×ºº®|¹³ÎÇ¶Ï³¦|ÇÒ´ýÊ±ÐÝ|À¼´ÝÓñÕÛ|ÖÓÁÖØ¹Ðã|ÑôÃ÷Ö¸|»Ã¹â²½|ÈÎ³Û³Ò") then
+
+            if tcasting("»ØÑ©Æ®Ò¡|×íÎè¾ÅÌì") then
+                if tcastprog() > 0.2 or tcastpass() > 0.3 or tcastleft() < 0.3 then
+                    stopcasting()
+                    CastX("ØÊÒõÖ¸")
+                end
+            end
             if tcastprog() > 0.4 or tcastpass() > 0.5 or tcastleft() < 0.3 then
+                stopcasting()
                 CastX("ØÊÒõÖ¸")
             end
         end
@@ -368,6 +379,10 @@ function OnCast(CasterID, SkillName, SkillID, SkillLevel, TargetType, TargetID, 
     if jjc() then
         if SkillName == "Ü½ÈØ²¢µÙ" and xrela("µÐ¶Ô", CasterID) then
             v["±»Ü½ÈØÄ¿±ê"] = TargetID
+        end
+
+        if SkillName == "ÆÆÖØÎ§" and xrela("µÐ¶Ô", CasterID) then
+
         end
     end
 

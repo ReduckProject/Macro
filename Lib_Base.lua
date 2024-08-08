@@ -257,24 +257,28 @@ end
 
 g_base["浮香丘箱子"] = function(skillname)
 
-    local id = doodad("名字:蓝方菌箱|红方菌箱", "距离<6", "距离最近")
-    if id ~= 0 then
+    local nid = doodad("名字:蓝方菌箱|红方菌箱", "距离<6", "距离最近")
+    if nid ~= 0 then
+        if target() and tid() ~= id() then
+            settar(id())
+        end
+
         if enemy("距离<20") ~= 0 then
             cast(skillname)
         end
         stopmove()
-        if interact(id) then
+        if interact(nid) then
             deltimer("浮香丘箱子")
         end
         exit()
     end
 
-    id = doodad("名字:蓝方菌箱|红方菌箱", "距离<24", "距离最近")
-    if id == 0 then
+    nid = doodad("名字:蓝方菌箱|红方菌箱", "距离<24", "距离最近")
+    if nid == 0 then
         return
     end
 
-    local x, y, z = xpos(id);
+    local x, y, z = xpos(nid);
     local tdis = pdis2(x, y)
     if enemy("距离<20") ~= 0 then
         cast(skillname)

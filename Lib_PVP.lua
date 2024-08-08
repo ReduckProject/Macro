@@ -8,6 +8,24 @@ g_var["快速位移状态"] = "被击退|冲刺|被抓"
 g_var["治疗心法"] = "离经易道|云裳心经|补天诀|相知|灵素"
 g_var["近战心法"] = "洗髓经|易筋经|傲血战意|铁牢律|太虚剑意|问水诀|山居剑意|焚影圣诀|明尊琉璃体|笑尘诀|铁骨衣|分山劲|北傲诀|凌海诀|隐龙诀|孤锋诀"
 g_var["远程心法"] = "花间游|紫霞功|冰心诀|毒经|惊羽诀|天罗诡道|莫问|太玄经|无方|山海心诀"
+g_var["紫霞功_免控"] = "生太极|镇山河"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["山海心诀_免控"] = "澄神醒梦|合神"
+g_var["傲血战意_免控"] = "疾如风|灭|任驰骋"
+g_var["毒经_免控"] = "幻蛊|迷心蛊|蛊虫狂暴|蛊虫献祭"
+g_var["补天诀_免控"] = "迷心蛊|蛊虫献祭"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
+g_var["太虚剑意_免控"] = "生太极|转乾坤"
 
 --函数表
 g_func = {}
@@ -19,26 +37,32 @@ g_func = {}
 
 
 g_func["初始化"] = function()
-    g_var["目标减伤效果"] = g_func["目标减伤效果"]()
-    g_var["目标闪避效果"] = tbuffstate("闪避效果")
-    g_var["目标减命中效果"] = tbuffstate("减命中效果")
+    --g_var["目标减伤效果"] = g_func["目标减伤效果"]()
+    --g_var["目标闪避效果"] = tbuffstate("闪避效果")
+    --g_var["目标减命中效果"] = tbuffstate("减命中效果")
+    --
+    --g_var["目标可控制"] = g_func["目标可控制"]()
+    --g_var["目标可攻击"] = g_var["目标可控制"] and g_func["目标可攻击"]()
+    --g_var["目标没减伤"] = g_var["目标可攻击"] and g_func["目标没减伤"]()
+    --
+    ----单次免伤, 御和点了奇穴乘龙戏水
+    --g_var["目标单次免伤"] = 0
+    --local nLeftTime, nStackNum = tbuffstate("单次免伤")
+    --if nLeftTime > -0.25 then
+    --    g_var["目标单次免伤"] = nStackNum
+    --end
+    --
+    --g_var["目标一刀"] = g_var["目标没减伤"] and g_var["目标单次免伤"] <= 0 and g_func["目标一刀"]()
+    --g_var["突进"] = g_var["目标可攻击"] and g_func["突进"]()
+    --
+    --_, g_var["附近敌人数量"] = enemy("距离<40")
 
-    g_var["目标可控制"] = g_func["目标可控制"]()
-    g_var["目标可攻击"] = g_var["目标可控制"] and g_func["目标可攻击"]()
-    g_var["目标没减伤"] = g_var["目标可攻击"] and g_func["目标没减伤"]()
-
-    --单次免伤, 御和点了奇穴乘龙戏水
-    g_var["目标单次免伤"] = 0
-    local nLeftTime, nStackNum = tbuffstate("单次免伤")
-    if nLeftTime > -0.25 then
-        g_var["目标单次免伤"] = nStackNum
+    if g_func["自己心法"] == nil then
+        --g_func["自己心法"] = xmount()
     end
-
-    g_var["目标一刀"] = g_var["目标没减伤"] and g_var["目标单次免伤"] <= 0 and g_func["目标一刀"]()
-    g_var["突进"] = g_var["目标可攻击"] and g_func["突进"]()
-
-    _, g_var["附近敌人数量"] = enemy("距离<40")
 end
+
+g_func["自己心法"] = nil
 
 --不打任何负面技能
 g_func["目标可控制"] = function()
@@ -414,7 +438,26 @@ g_func["一刀"] = function(dis2)
     end
 end
 
+g_func["免控"] = function()
+    if notarget() then
+        return false;
+    end
 
+    --5950 - 蛊虫献祭
+    --24329 - 驭虫
+    -- 2840 - 蛊虫狂暴
+    -- 13735 - 浮游天地
+    -- 6087 -- 流火连星（飞行遁影）
+    return not tbuff("青阳|突|纵轻骑|力拔|水月无间|锻骨|5950|24329|2840|迷心蛊|6087|浮空|啸日|梦泉虎跑|星楼月影|定波砥澜|骋风|返闭惊魂|澄神|游雾乘云|合神|鹊踏枝|斩无常|盾立|生太极|转乾坤|镇山河")
+end
+
+g_func["无敌"] = function()
+    if notarget() then
+        return false;
+    end
+
+    return not tbuff("盾立|镇山河|南风吐月|长致|")
+end
 g_func["N尺内敌人"] = function(dis2, notid)
     if notid ~= nil and notid ~= 0 then
          return enemy("距离<" .. dis2, "视线可达", "没载具", "气血最少", "ID不等于:".. notid)

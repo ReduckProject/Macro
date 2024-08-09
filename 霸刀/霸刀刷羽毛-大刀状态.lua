@@ -8,7 +8,7 @@ local f = {}
 --主循环
 function Main(g_player)
 	local nid = f["切换目标"]()
-	if nid ~= 0 and nid ~= nil and notarget() then
+	if nid ~= 0 and nid ~= nil and (notarget() or dis() > 15) then
 		settar(nid)
 	end
 
@@ -16,7 +16,7 @@ function Main(g_player)
 		return
 	end
 	turn()
-	cast("项王击鼎")
+	--cast("项王击鼎")
 end
 
 f["切换目标"] = function()

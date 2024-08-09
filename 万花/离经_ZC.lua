@@ -28,6 +28,7 @@ local x, y, z = pos()
 v["被芙蓉目标"] = 0
 addopt("目标锁定", false)
 addopt("攻防送", false)
+addopt("关闭轻功监控", false)
 --主循环
 function Main()
     --if life() < 0.1 then
@@ -50,7 +51,9 @@ function Main()
         cast("扶摇直上")
     end
 
-    local x1, y1, z1 = g_func["小轻功"]()
+    if not getopt("关闭轻功监控")  then
+        local x1, y1, z1 = g_func["小轻功"]()
+    end
 
     if buff("展缓") then
         bigtext("展缓 不要动")
